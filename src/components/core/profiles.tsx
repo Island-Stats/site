@@ -19,7 +19,7 @@ export default function Profiles() {
 				href={"/player/" + profile.uuid}
 				className="relative inline-block p-5"
 			>
-				<PlayerHead uuid={profile.uuid} username={player.name} />
+				<PlayerHead {...{uuid:profile.uuid, username:player.name}} />
 				<p className="absolute left-24 top-5 font-semibold text-lg">
 					{player.name}
 				</p>
