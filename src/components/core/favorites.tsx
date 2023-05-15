@@ -32,7 +32,7 @@ export default function Favorites() {
 
 			return (
 				<Link href={"/player/" + uuid} className="relative inline-block p-5">
-					<PlayerHead uuid={uuid} />
+					<PlayerHead uuid={uuid} username={player.name} />
 					<p className="absolute left-24 top-5 font-semibold text-lg">
 						{player.name}
 					</p>
