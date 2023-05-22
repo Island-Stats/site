@@ -36,7 +36,7 @@ export async function getMojangProfile(
 	try {
 		let url = uuidURL;
 		if (data.length > 16) url = usernameURL;
-		const response = await fetch(url + data);
+		const response = await fetch(url + data, { next: { revalidate: 60 * 30 } }); // Cache for 30 minutes
 		if (!response.ok) return undefined;
 		return await response.json();
 	} catch (ignored) {
