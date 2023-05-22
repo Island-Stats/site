@@ -1,26 +1,27 @@
 import { type } from "os";
 
-const ranks = {
-	noxcrew: "Noxcrew",
-	admin: "Admin",
-	mod: "Mod",
-	creator: "Creator",
-	contestant: "Contestant",
-	vip: "VIP",
-	"gc-royal": "Grand Champ Royale",
-	"grand-champ": "Grand Champ",
-	champ: "Champ",
-};
+export enum Ranks {
+	noxcrew = "Noxcrew",
+	admin = "Admin",
+	mod = "Mod",
+	creator = "Creator",
+	contestant = "Contestant",
+	vip = "VIP",
+	gc_royal = "Grand Champ Royale",
+	grand_champ = "Grand Champ",
+	champ = "Champ",
+	player = 0,
+}
 
-type RankType = keyof typeof ranks;
-
-export default function Rank({ rank }: { rank: string }) {
+export default function Rank({ rank }: { rank: Ranks }) {
+	if (rank == Ranks.player) return null;
+	const rankKey = Object.keys(Ranks)[Object.values(Ranks).indexOf(rank)]
 	return (
 		<div
 			className="mcc-colors flex mt-1 px-4 rounded-full font-bold text-lg justify-center items-center"
-			style={{ backgroundColor: `var(--${rank})` }}
+			style={{ backgroundColor: `var(--${rankKey})` }}
 		>
-			{ranks[rank as RankType]}{" "}
+			{rank}{" "}
 		</div>
 	);
 }
