@@ -38,8 +38,8 @@
 	--creator: #df2362;
 	--contestant: #df2362;
 	--vip: #df2362;
-	--gc-royal: #fd7e00;
-	--grand-champ: #009ddb;
+	--gc_royal: #fd7e00;
+	--grand_champ: #009ddb;
 	--champ: #2bc804;
 }
 
@@ -80,6 +80,10 @@ main.grid > * {
 
 .pixelated {
 	image-rendering: pixelated;
+}
+
+.icon-shadow {
+	filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.4));
 }
 
 /* Tippy */
