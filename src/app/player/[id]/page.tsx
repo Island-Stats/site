@@ -3,11 +3,23 @@ import NoticeBoard from "@/components/core/notice-board";
 import Error from "@/components/core/error";
 import Favorites from "@/components/core/favorites";
 import Profiles from "@/components/core/profiles";
-import Rank from "@/components/player/rank";
+import Rank, { Ranks } from "@/components/player/rank";
 import FavoriteButton from "@/components/buttons/favorite";
 import ShareButton from "@/components/buttons/share";
 import { Size, getMojangProfile, getPlayerHead } from "@/utils/player";
 import { Metadata } from "next";
+import Faction from "@/components/player/faction";
+import TGTTOS from "@/components/stats/tgttos";
+import HoleInTheWall from "@/components/stats/hole-in-the-wall";
+import SkyBattle from "@/components/stats/sky-battle";
+import BattleBox from "@/components/stats/battle-box";
+
+const data = {
+	tgttos: {},
+	battle_box: {},
+	sky_battle: {},
+	hole_in_the_wall: {},
+};
 
 export async function generateMetadata({
 	params,
@@ -21,7 +33,7 @@ export async function generateMetadata({
 	}
 
 	return {
-		title,
+		title: `${player.name}`,
 		icons: {
 			icon: getPlayerHead(params.id, Size.small),
 		},
@@ -79,14 +91,32 @@ export default async function Stats({ params }: { params: { id: string } }) {
 	} else {
 		return (
 			<main className="backdrop-blur-lg backdrop-brightness-50 w-3/5 mx-auto min-h-full">
-				<div className="flex flex-wrap justify-items-center gap-3 py-5 text-4xl">
+				<div
+					id="profile"
+					className="flex flex-wrap justify-items-center gap-3 py-5 text-4xl"
+				>
 					<span>Stats for</span>
-					<Rank rank={"noxcrew"} />
+					<Rank rank={Ranks.noxcrew} />
 					<span className="font-semibold">{player.name}</span>
 					<div className="w-full text-sm">
 						<FavoriteButton uuid={player.id} />
 						<ShareButton username={player.name} />
 					</div>
+				</div>
+				<div
+					id="levels"
+					className="bg-black bg-opacity-30 p-5 ml-[calc(-1*20px)] mr-[calc(-1*20px)]"
+				>
+					<div className="w-full grid grid-cols-1 gap-x-1 gap-y-5">
+						<Faction />
+					</div>
+				</div>
+				<div id="stats" className="grid grid-cols-4 gap-x-2 gap-y-5 mt-4">
+					<p className="col-span-4 text-4xl font-semibold">Game Stats</p>
+					<TGTTOS data={data.tgttos} />
+					<HoleInTheWall data={data.hole_in_the_wall} />
+					<SkyBattle data={data.sky_battle} />
+					<BattleBox data={data.battle_box} />
 				</div>
 			</main>
 		);
