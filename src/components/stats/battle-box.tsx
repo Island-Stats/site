@@ -1,6 +1,11 @@
+import { PlayerData } from "@/utils/player";
 import Image from "next/image";
 
-export default function BattleBox({ data }: { data: any }) {
+export default function BattleBox({
+	data,
+}: {
+	data: PlayerData["data"]["battle_box"];
+}) {
 	return (
 		<div className="flex flex-col mx-auto">
 			<div className="flex gap-1 py-1">
@@ -14,53 +19,46 @@ export default function BattleBox({ data }: { data: any }) {
 				/>
 			</div>
 			<p>
-				Round First Place:{" "}
-				<span className="text-neutral-300">{data.round_first_place ?? 0}</span>
-			</p>
-			<p>
-				Round Top Three:{" "}
-				<span className="text-neutral-300">{data.round_top_three ?? 0}</span>
-			</p>
-			<p>
-				Round Top Five:{" "}
-				<span className="text-neutral-300">{data.round_top_five ?? 0}</span>
-			</p>
-			<p>
-				Round Top Eight:{" "}
-				<span className="text-neutral-300">{data.round_top_eight ?? 0}</span>
-			</p>
-			<p>
-				Round Top 50%:{" "}
-				<span className="text-neutral-300">
-					{data.round_top_fifty_percent ?? 0}
+				Team First Place:{" "}
+				<span className="text-neutral-400">
+					{data.team_first_place?.toLocaleString() ?? "-"}
 				</span>
 			</p>
 			<p>
-				First Place:{" "}
-				<span className="text-neutral-300">{data.first_place ?? 0}</span>
+				Team Second Place:{" "}
+				<span className="text-neutral-400">
+					{data.team_second_place?.toLocaleString() ?? "-"}
+				</span>
 			</p>
 			<p>
-				Top Three:{" "}
-				<span className="text-neutral-300">{data.top_three ?? 0}</span>
+				Team Third Place:{" "}
+				<span className="text-neutral-400">
+					{data.team_third_place?.toLocaleString() ?? "-"}
+				</span>
 			</p>
 			<p>
-				Top Five: <span className="text-neutral-300">{data.top_five ?? 0}</span>
+				Team Fourth Place:{" "}
+				<span className="text-neutral-400">
+					{data.team_fourth_place?.toLocaleString() ?? "-"}
+				</span>
 			</p>
 			<p>
-				Top Eight:{" "}
-				<span className="text-neutral-300">{data.top_eight ?? 0}</span>
+				Team Rounds Won:{" "}
+				<span className="text-neutral-400">
+					{data.team_rounds_won?.toLocaleString() ?? "-"}
+				</span>
 			</p>
 			<p>
-				Top 50%:{" "}
-				<span className="text-neutral-300">{data.top_fifty_percent ?? 0}</span>
+				Players Killed:{" "}
+				<span className="text-neutral-400">
+					{data.players_killed?.toLocaleString() ?? "-"}
+				</span>
 			</p>
 			<p>
 				Games Played:{" "}
-				<span className="text-neutral-300">{data.games_played ?? 0}</span>
-			</p>
-			<p>
-				Chickens Punched:{" "}
-				<span className="text-neutral-300">{data.chickens_punched ?? 0}</span>
+				<span className="text-neutral-400">
+					{data.games_played?.toLocaleString() ?? "-"}
+				</span>
 			</p>
 		</div>
 	);
