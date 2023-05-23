@@ -3,23 +3,16 @@ import NoticeBoard from "@/components/core/notice-board";
 import Error from "@/components/core/error";
 import Favorites from "@/components/core/favorites";
 import Profiles from "@/components/core/profiles";
-import Rank, { Ranks } from "@/components/player/rank";
+import Rank from "@/components/player/rank";
 import FavoriteButton from "@/components/buttons/favorite";
 import ShareButton from "@/components/buttons/share";
-import { Size, getMojangProfile, getPlayerHead } from "@/utils/player";
+import { PlayerData, Size, getMojangProfile, getPlayerData, getPlayerHead } from "@/utils/player";
 import { Metadata } from "next";
 import Faction from "@/components/player/faction";
 import TGTTOS from "@/components/stats/tgttos";
 import HoleInTheWall from "@/components/stats/hole-in-the-wall";
 import SkyBattle from "@/components/stats/sky-battle";
 import BattleBox from "@/components/stats/battle-box";
-
-const data = {
-	tgttos: {},
-	battle_box: {},
-	sky_battle: {},
-	hole_in_the_wall: {},
-};
 
 export async function generateMetadata({
 	params,
@@ -35,13 +28,13 @@ export async function generateMetadata({
 	return {
 		title: `${player.name}`,
 		icons: {
-			icon: getPlayerHead(params.id, Size.small),
+			icon: getPlayerHead(player.id, Size.small),
 		},
 		openGraph: {
 			title,
 			images: [
 				{
-					url: getPlayerHead(params.id, Size.full),
+					url: getPlayerHead(player.id, Size.full),
 				},
 			],
 			description: "",
@@ -54,7 +47,7 @@ export async function generateMetadata({
 			card: "summary_large_image",
 			images: [
 				{
-					url: getPlayerHead(params.id, Size.full),
+					url: getPlayerHead(player.id, Size.full),
 				},
 			],
 		},
@@ -89,6 +82,18 @@ export default async function Stats({ params }: { params: { id: string } }) {
 			</main>
 		);
 	} else {
+		const playerData = await getPlayerData(player.id);
+		let data;
+		if (!playerData) {
+			data = {
+				tgttos: {},
+				hole_in_the_wall: {},
+				sky_battle: {},
+				battle_box: {},
+			};
+		} else {
+			data = playerData.data;
+		}
 		return (
 			<main className="backdrop-blur-lg backdrop-brightness-50 w-3/5 mx-auto min-h-full">
 				<div
@@ -96,7 +101,7 @@ export default async function Stats({ params }: { params: { id: string } }) {
 					className="flex flex-wrap justify-items-center gap-3 py-5 text-4xl"
 				>
 					<span>Stats for</span>
-					<Rank rank={Ranks.noxcrew} />
+					<Rank rank={(playerData?.rank ?? "player")} />
 					<span className="font-semibold">{player.name}</span>
 					<div className="w-full text-sm">
 						<FavoriteButton uuid={player.id} />
@@ -112,11 +117,11 @@ export default async function Stats({ params }: { params: { id: string } }) {
 					</div>
 				</div>
 				<div id="stats" className="grid grid-cols-4 gap-x-2 gap-y-5 mt-4">
-					<p className="col-span-4 text-4xl font-semibold">Game Stats</p>
-					<TGTTOS data={data.tgttos} />
-					<HoleInTheWall data={data.hole_in_the_wall} />
-					<SkyBattle data={data.sky_battle} />
-					<BattleBox data={data.battle_box} />
+					<p className="col-span-4 text-4xl font-semibold">Game Stats <span className="text-neutral-400 text-base">Total games played: {data.games_played?.toLocaleString() ?? 0}</span></p>
+					<TGTTOS data={data.tgttos as PlayerData["data"]["tgttos"]} />
+					<HoleInTheWall data={data.hole_in_the_wall as PlayerData["data"]["hole_in_the_wall"]} />
+					<SkyBattle data={data.sky_battle as PlayerData["data"]["sky_battle"]} />
+					<BattleBox data={data.battle_box as PlayerData["data"]["battle_box"]} />
 				</div>
 			</main>
 		);
