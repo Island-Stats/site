@@ -4,7 +4,7 @@ import Parser from "rss-parser";
 export const revalidate = 60 * 60 // 1 hour cache
 
 const rssFeed =
-	"https://mccisland.net/forums/announcements-news.50/index.rss?prefix_id=4"; // &order=post_date
+	"https://mccisland.net/forums/announcements-news.50/index.rss?prefix_id=4&order=post_date";
 
 export default async function NoticeBoard() {
 	try {
