@@ -1,0 +1,48 @@
+{
+    "uuid": "6817a59a9c914f5eac0301cc9b2fd66e",
+    "rank": "grand_champ",
+    "data": {
+        "sky_battle": {
+            "survival_first_place": 1278,
+            "survival_top_three": 1600,
+            "survival_top_five": 2228,
+            "survival_top_eight": 3340,
+            "survival_top_fifty_percent": 6257,
+            "players_killed": 22144,
+            "games_played": 10891
+        },
+        "battle_box": {
+            "team_first_place": 1481,
+            "team_second_place": 820,
+            "team_third_place": 475,
+            "team_fourth_place": 299,
+            "team_rounds_won": 6416,
+            "players_killed": 8894,
+            "games_played": 2917
+        },
+        "tgttos": {
+            "first_place": 285,
+            "top_three": 651,
+            "top_five": 799,
+            "top_eight": 896,
+            "top_fifty_percent": 881,
+            "round_first_place": 786,
+            "round_top_three": 1625,
+            "round_top_five": 2075,
+            "round_top_eight": 2492,
+            "round_top_fifty_percent": 2436,
+            "chickens_punched": 2808,
+            "games_played": 976
+        },
+        "hole_in_the_wall": {
+            "first_place": 296,
+            "top_three": 665,
+            "top_five": 956,
+            "top_eight": 1273,
+            "top_fifty_percent": 1256,
+            "walls_dodged": 34011,
+            "games_played": 2022
+        },
+        "games_played": 16806
+    }
+}

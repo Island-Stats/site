@@ -1,0 +1,48 @@
+{
+    "uuid": "3e7a89eec4e24392a317444b861b0794",
+    "rank": "noxcrew",
+    "data": {
+        "sky_battle": {
+            "survival_first_place": null,
+            "survival_top_three": null,
+            "survival_top_five": null,
+            "survival_top_eight": null,
+            "survival_top_fifty_percent": 5,
+            "players_killed": 2,
+            "games_played": 10
+        },
+        "battle_box": {
+            "team_first_place": 1,
+            "team_second_place": 3,
+            "team_third_place": 1,
+            "team_fourth_place": 6,
+            "team_rounds_won": 11,
+            "players_killed": 14,
+            "games_played": 11
+        },
+        "tgttos": {
+            "first_place": null,
+            "top_three": null,
+            "top_five": null,
+            "top_eight": 1,
+            "top_fifty_percent": null,
+            "round_first_place": null,
+            "round_top_three": null,
+            "round_top_five": 1,
+            "round_top_eight": 3,
+            "round_top_fifty_percent": 3,
+            "chickens_punched": 6,
+            "games_played": 2
+        },
+        "hole_in_the_wall": {
+            "first_place": null,
+            "top_three": null,
+            "top_five": null,
+            "top_eight": 2,
+            "top_fifty_percent": 1,
+            "walls_dodged": 44,
+            "games_played": 4
+        },
+        "games_played": 27
+    }
+}
