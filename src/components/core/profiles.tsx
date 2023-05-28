@@ -7,6 +7,10 @@ const profiles = [
 		uuid: "4e832e0d14b64f8face2280a9bf9dd98", // TheMysterys
 		message: "Just another random player",
 	},
+	{
+		uuid: "3e7a89eec4e24392a317444b861b0794", // Noxite
+		message: "Such a smooth mustache",
+	},
 ];
 
 export default function Profiles() {
@@ -17,9 +21,9 @@ export default function Profiles() {
 		return (
 			<Link
 				href={"/player/" + profile.uuid}
-				className="relative inline-block p-5"
+				className="relative inline-block p-5 transition-transform ease-in-out hover:scale-[1.015]"
 			>
-				<PlayerHead {...{uuid:profile.uuid, username:player.name}} />
+				<PlayerHead {...{ uuid: profile.uuid, username: player.name }} />
 				<p className="absolute left-24 top-5 font-semibold text-lg">
 					{player.name}
 				</p>

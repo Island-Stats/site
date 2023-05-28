@@ -31,7 +31,7 @@ export default function Favorites() {
 			if (!player) return;
 
 			return (
-				<Link href={"/player/" + uuid} className="relative inline-block p-5">
+				<Link href={"/player/" + uuid} className="relative inline-block p-5 transition-transform ease-in-out hover:scale-[1.015]">
 					<PlayerHead {...{uuid, username: player.name}} />
 					<p className="absolute left-24 top-5 font-semibold text-lg">
 						{player.name}
