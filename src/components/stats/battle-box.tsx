@@ -7,15 +7,15 @@ export default function BattleBox({
 	data: PlayerData["data"]["battle_box"];
 }) {
 	return (
-		<div className="flex flex-col mx-auto">
-			<div className="flex gap-1 py-1">
-				<p className="text-2xl font-semibold">Battle Box</p>
+		<div className="flex flex-col mx-auto max-md:text-center">
+			<div className="flex justify-between gap-1 py-1">
+				<p className="text-xl font-semibold">Battle Box</p>
 				<Image
 					src="/images/icons/battle_box_icon.png"
 					alt="Battle Box"
 					width={32}
 					height={32}
-					className="pixelated"
+					className="w-8 h-8 pixelated"
 				/>
 			</div>
 			<p>

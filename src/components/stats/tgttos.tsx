@@ -7,15 +7,15 @@ export default function TGTTOS({
 	data: PlayerData["data"]["tgttos"];
 }) {
 	return (
-		<div className="flex flex-col mx-auto">
-			<div className="flex gap-1 py-1">
-				<p className="text-2xl font-semibold">TGTTOS</p>
+		<div className="flex flex-col mx-auto max-md:text-center">
+			<div className="flex justify-between gap-1 py-1">
+				<p className="text-xl font-semibold">TGTTOS</p>
 				<Image
 					src="/images/icons/tgttos_icon.png"
 					alt="TGTTOS"
 					width={32}
 					height={32}
-					className="pixelated"
+					className="w-8 h-8 pixelated"
 				/>
 			</div>
 			<p>

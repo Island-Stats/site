@@ -7,15 +7,15 @@ export default function HoleInTheWall({
 	data: PlayerData["data"]["hole_in_the_wall"];
 }) {
 	return (
-		<div className="flex flex-col mx-auto">
-			<div className="flex gap-1 py-1">
-				<p className="text-2xl font-semibold">Hole in the Wall</p>
+		<div className="flex flex-col mx-auto max-md:text-center">
+			<div className="flex justify-between gap-1 py-1">
+				<p className="text-xl font-semibold">Hole in the Wall</p>
 				<Image
 					src="/images/icons/hole_in_the_wall_icon.png"
 					alt="Hole in the Wall"
 					width={32}
 					height={32}
-					className="pixelated"
+					className="w-8 h-8 pixelated"
 				/>
 			</div>
 			<p>

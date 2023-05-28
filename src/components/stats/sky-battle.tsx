@@ -7,15 +7,15 @@ export default function SkyBattle({
 	data: PlayerData["data"]["sky_battle"];
 }) {
 	return (
-		<div className="flex flex-col mx-auto">
-			<div className="flex gap-1 py-1">
-				<p className="text-2xl font-semibold">Sky Battle</p>
+		<div className="flex flex-col mx-auto max-md:text-center">
+			<div className="flex justify-between gap-1 py-1 ">
+				<p className="text-xl font-semibold">Sky Battle</p>
 				<Image
 					src="/images/icons/sky_battle_icon.png"
 					alt="Sky Battle"
 					width={32}
 					height={32}
-					className="pixelated"
+					className="w-8 h-8 pixelated"
 				/>
 			</div>
 			<p>
