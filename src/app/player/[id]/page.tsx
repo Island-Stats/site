@@ -13,6 +13,7 @@ import TGTTOS from "@/components/stats/tgttos";
 import HoleInTheWall from "@/components/stats/hole-in-the-wall";
 import SkyBattle from "@/components/stats/sky-battle";
 import BattleBox from "@/components/stats/battle-box";
+import CoreData from "@/components/player/core-data";
 
 export async function generateMetadata({
 	params,
@@ -98,7 +99,7 @@ export default async function Stats({ params }: { params: { id: string } }) {
 			<main className="backdrop-blur-lg backdrop-brightness-50 w-3/5 mx-auto min-h-full">
 				<div
 					id="profile"
-					className="flex flex-wrap justify-items-center gap-3 py-5 text-4xl"
+					className="flex flex-wrap justify-items-center gap-3 py-5 text-2xl md:text-4xl"
 				>
 					<span>Stats for</span>
 					<Rank rank={(playerData?.rank ?? "player")} />
@@ -114,10 +115,14 @@ export default async function Stats({ params }: { params: { id: string } }) {
 				>
 					<div className="w-full grid grid-cols-1 gap-x-1 gap-y-5">
 						<Faction />
+						<CoreData />
 					</div>
 				</div>
-				<div id="stats" className="grid grid-cols-4 gap-x-2 gap-y-5 mt-4">
-					<p className="col-span-4 text-4xl font-semibold">Game Stats <span className="text-neutral-400 text-base">Total games played: {data.games_played?.toLocaleString() ?? 0}</span></p>
+				<div id="stats" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-2 gap-y-5 mt-4">
+					<div className="col-span-full flex flex-col md:flex-row md:items-end">
+					<p className="text-2xl md:text-4xl font-semibold pr-1">Game Stats</p>
+					<p className="text-neutral-400 text-base">Total games played: {data.games_played?.toLocaleString() ?? 0}</p>
+					</div>
 					<TGTTOS data={data.tgttos as PlayerData["data"]["tgttos"]} />
 					<HoleInTheWall data={data.hole_in_the_wall as PlayerData["data"]["hole_in_the_wall"]} />
 					<SkyBattle data={data.sky_battle as PlayerData["data"]["sky_battle"]} />
