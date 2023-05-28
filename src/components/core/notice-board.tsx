@@ -31,7 +31,7 @@ export default async function NoticeBoard() {
 				href={link}
 				rel="noreferrer"
 				target="_blank"
-				className="group col-span-full py-5 transition-transform ease-in-out transform hover:scale-[1.015] text-center"
+				className="group col-span-full py-5 transition-transform ease-in-out hover:scale-[1.015] text-center"
 			>
 				<p className="text-neutral-400 text-xl font-semibold group-hover:text-neutral-200 transition-colors duration-300">
 					{title}
