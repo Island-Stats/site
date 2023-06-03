@@ -41,6 +41,8 @@
 	--gc_royal: #fd7e00;
 	--grand_champ: #009ddb;
 	--champ: #2bc804;
+	/* Website colors */
+	--yellow: #ffdb29;
 }
 
 @media (prefers-color-scheme: dark) {
