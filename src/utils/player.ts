@@ -105,3 +105,13 @@ export async function getPlayerData(id: string): Promise<PlayerData | undefined>
 	if (!response.ok) return undefined;
 	return (await response.json());
 }
+
+export async function isValidPlayer(id: string): Promise<boolean> {
+	const response = await fetch(`http://localhost:3000/files/${id}.json`, {
+		next: {
+			revalidate: 0, // Cache for 5 minutes
+		},
+	});
+	if (!response.ok) return false;
+	return true;
+}
