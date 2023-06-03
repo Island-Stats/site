@@ -35,7 +35,10 @@ export default function MainSearch() {
 			setError(
 				error instanceof Error
 					? error.message
-					: String(error ?? "please enter a valid Minecraft username or UUID")
+					: String(
+							error ??
+								"please enter a valid Minecraft username or UUID"
+					  )
 			);
 
 			show();
@@ -64,7 +67,7 @@ export default function MainSearch() {
 			</Tippy>
 			<button
 				type="submit"
-				className="flex h-9 items-center bg-blue-400 rounded-md uppercase text-sm text-white font-bold px-4 transition-transform ease-in-out transform hover:scale-105"
+				className="flex h-9 items-center mcc-colors bg-[--yellow] rounded-md uppercase text-sm text-black font-bold px-4 transition-all duration-300 ease-in-out hover:-translate-y-1 hover:bg-yellow-400"
 			>
 				Search
 			</button>
