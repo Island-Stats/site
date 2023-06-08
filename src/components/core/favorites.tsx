@@ -2,6 +2,7 @@ import Link from "next/link";
 import PlayerHead from "../player/player-head";
 import { cookies } from "next/headers";
 import { getMojangProfile } from "@/utils/player";
+import Image from "next/image";
 
 export default function Favorites() {
 	const cookieStore = cookies();
@@ -10,7 +11,7 @@ export default function Favorites() {
 	if (!favorites || favorites.value == "") {
 		return (
 			<div className="relative inline-block p-5">
-				<img
+				<Image
 					alt="question mark player head"
 					src={"/images/q.png"}
 					className="rounded-md pixelated"
@@ -21,7 +22,7 @@ export default function Favorites() {
 					No favorites set!
 				</p>
 				<p className="absolute left-24 top-12 w-56">
-					Why don't you set a favorite?
+					Why don{"'"}t you set a favorite?
 				</p>
 			</div>
 		);
@@ -31,8 +32,12 @@ export default function Favorites() {
 			if (!player) return;
 
 			return (
-				<Link href={"/player/" + uuid} className="relative inline-block p-5 transition-transform ease-in-out hover:scale-[1.015]">
-					<PlayerHead {...{uuid, username: player.name}} />
+				<Link
+					key={uuid}
+					href={"/player/" + uuid}
+					className="inline-block p-5 border-2 border-transparent hover:border-sky-500 transition-colors duration-500"
+				>
+					<PlayerHead {...{ uuid, username: player.name }} />
 					<p className="absolute left-24 top-5 font-semibold text-lg">
 						{player.name}
 					</p>

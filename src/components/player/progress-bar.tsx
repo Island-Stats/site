@@ -56,7 +56,7 @@ export default function ProgressBar({
 					className={`absolute left-0 top-0 bottom-0 bg-sky-500 ${
 						icon ? "rounded-r-md" : "rounded-md"
 					} text-center`}
-					style={{ width: `calc((100%-20px)*${(current / max).toFixed(4)})` }}
+					style={{ width: `calc((100% - 20px)*${(current / max).toFixed(4)})` }}
 				></div>
 				<div onMouseOver={() => setHover(true)} onMouseOut={() => setHover(false)} className="absolute left-5 right-0 top-0 bottom-0 text-center font-semibold text-sm">
 					{hover ? `${current.toLocaleString()} / ${max.toLocaleString()}` : `${

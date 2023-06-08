@@ -32,15 +32,17 @@
 }
 
 :root .mcc-colors {
-	--noxcrew: #cf0900;
-	--admin: #cf0900;
-	--mod: #892bc4;
-	--creator: #df2362;
-	--contestant: #df2362;
-	--vip: #df2362;
+	--noxcrew: #e93c3c;
+	--admin: #e93c3c;
+	--mod: #b337ff;
+	--creator: #ef2793;
+	--contestant: #ef2793;
+	--vip: #ef2793;
 	--gc_royal: #fd7e00;
 	--grand_champ: #009ddb;
 	--champ: #2bc804;
+	/* Website colors */
+	--yellow: #ffdb29;
 }
 
 @media (prefers-color-scheme: dark) {

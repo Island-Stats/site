@@ -1,0 +1,48 @@
+{
+    "uuid": "e01d8da3993941dc98d8cec81d6a92d2",
+    "rank": "champ",
+    "data": {
+        "sky_battle": {
+            "survival_first_place": 13,
+            "survival_top_three": 16,
+            "survival_top_five": 24,
+            "survival_top_eight": 46,
+            "survival_top_fifty_percent": 106,
+            "players_killed": 92,
+            "games_played": 218
+        },
+        "battle_box": {
+            "team_first_place": 8,
+            "team_second_place": 11,
+            "team_third_place": 18,
+            "team_fourth_place": 12,
+            "team_rounds_won": 62,
+            "players_killed": 70,
+            "games_played": 47
+        },
+        "tgttos": {
+            "first_place": 1,
+			"top_three": 13,
+			"top_five": 30,
+			"top_eight": 58,
+			"top_fifty_percent": 52,
+			"round_first_place": 6,
+			"round_top_three": 41,
+			"round_top_five": 92,
+			"round_top_eight": 163,
+			"round_top_fifty_percent": 156,
+			"chickens_punched": 288,
+			"games_played": 99
+        },
+		"hole_in_the_wall": {
+			"first_place": 7,
+			"top_three": 16,
+			"top_five": 35,
+			"top_eight": 51,
+			"top_fifty_percent": 52,
+			"walls_dodged": 1224,
+			"games_played": 91
+        },
+		"games_played": 455
+    }
+}

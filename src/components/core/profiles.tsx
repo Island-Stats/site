@@ -20,8 +20,9 @@ export default function Profiles() {
 
 		return (
 			<Link
+				key={profile.uuid}
 				href={"/player/" + profile.uuid}
-				className="relative inline-block p-5 transition-transform ease-in-out hover:scale-[1.015]"
+				className="inline-block p-5 border-2 border-transparent hover:border-sky-500 transition-colors duration-500"
 			>
 				<PlayerHead {...{ uuid: profile.uuid, username: player.name }} />
 				<p className="absolute left-24 top-5 font-semibold text-lg">

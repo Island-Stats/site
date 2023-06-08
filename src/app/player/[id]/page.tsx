@@ -6,7 +6,7 @@ import Profiles from "@/components/core/profiles";
 import Rank from "@/components/player/rank";
 import FavoriteButton from "@/components/buttons/favorite";
 import ShareButton from "@/components/buttons/share";
-import { PlayerData, Size, getMojangProfile, getPlayerData, getPlayerHead } from "@/utils/player";
+import { PlayerData, Size, getMojangProfile, getPlayerData, getPlayerHead, isValidPlayer } from "@/utils/player";
 import { Metadata } from "next";
 import Faction from "@/components/player/faction";
 import TGTTOS from "@/components/stats/tgttos";
@@ -22,7 +22,8 @@ export async function generateMetadata({
 }): Promise<Metadata> {
 	let title;
 	const player = await getMojangProfile(params.id);
-	if (!player) {
+	const validPlayer = player ? await isValidPlayer(player.id) : false;
+	if (!player || !validPlayer) {
 		return {};
 	}
 
@@ -67,9 +68,14 @@ export default async function Stats({ params }: { params: { id: string } }) {
 		// If "id" was a username then player does not exist
 		error = `Player with username "${params.id}" does not exist.`;
 	}
+	const playerData = player ? await getPlayerData(player.id) : undefined;
+
+	if (!playerData && !error) {
+		error = "Failed to fetch player data.";
+	}
 
 	// If player exists then display their stats
-	if (!player) {
+	if (!player || !playerData) {
 		return (
 			<main className="grid">
 				<MainSearch />
@@ -83,7 +89,6 @@ export default async function Stats({ params }: { params: { id: string } }) {
 			</main>
 		);
 	} else {
-		const playerData = await getPlayerData(player.id);
 		let data;
 		if (!playerData) {
 			data = {
