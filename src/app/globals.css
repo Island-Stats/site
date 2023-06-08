@@ -78,6 +78,58 @@ main.grid > * {
 	backdrop-filter: blur(16px) brightness(0.5);
 }
 
+.expander {
+	cursor: pointer;
+}
+
+.expander::before {
+	content: " ";
+	position: fixed;
+	top: calc(48px + env(safe-area-inset-top, 0));
+	bottom: 0;
+	left: 0;
+	right: 0;
+	visibility: hidden;
+	background-color: rgba(0, 0, 0, 0);
+	transition: background-color 0.3s ease-in-out, visibility 0.3s linear;
+}
+
+.expander[aria-expanded="true"]::before {
+	visibility: visible;
+	background-color: rgba(0, 0, 0, 0.8);
+}
+
+#info-box {
+	left: max(20px, env(safe-area-inset-left, 0));
+	width: 512px;
+	padding: 14px 30px;
+	line-height: initial;
+	--clip-center: 120px 0;
+}
+
+.expander[aria-expanded="true"] + .expandable {
+	visibility: visible;
+	clip-path: circle(150% at var(--clip-center));
+}
+
+.expander + .expandable {
+	position: fixed;
+	top: calc(48px + env(safe-area-inset-top, 0));
+	max-height: calc(
+		100vh - 48px - env(safe-area-inset-top, 0) - env(safe-area-inset-bottom, 0)
+	);
+	box-sizing: border-box;
+	margin: 0;
+	overflow-y: auto;
+	overscroll-behavior: contain;
+	z-index: 100;
+	border-radius: 10px;
+	background-color: rgba(var(--grey_background-rgb), 0.95);
+	visibility: hidden;
+	clip-path: circle(0% at var(--clip-center));
+	transition: clip-path 0.3s ease-in-out, visibility 0.3s linear;
+}
+
 .pixelated {
 	image-rendering: pixelated;
 }
