@@ -67,7 +67,7 @@ export default function MainSearch() {
 			</Tippy>
 			<button
 				type="submit"
-				className="flex h-9 items-center mcc-colors bg-[--yellow] rounded-md uppercase text-sm text-black font-bold px-4 transition-all duration-300 ease-in-out hover:-translate-y-1 hover:bg-yellow-400"
+				className="flex h-9 items-center bg-sky-500 rounded-md uppercase text-sm text-black font-bold px-4 transition-all duration-300 ease-in-out hover:-translate-y-1 hover:bg-sky-400"
 			>
 				Search
 			</button>
