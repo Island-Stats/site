@@ -35,7 +35,7 @@ export default function Favorites() {
 				<Link
 					key={uuid}
 					href={"/player/" + uuid}
-					className="relative inline-block p-5 border-2 border-transparent hover:border-sky-500 transition-colors duration-500"
+					className="inline-block p-5 border-2 border-transparent hover:border-sky-500 transition-colors duration-500"
 				>
 					<PlayerHead {...{ uuid, username: player.name }} />
 					<p className="absolute left-24 top-5 font-semibold text-lg">
