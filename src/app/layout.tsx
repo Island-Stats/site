@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import "./globals.css";
-import NavBar from "@/components/core/nab-bar";
+import NavBar from "@/components/nav/nab-bar";
 
 export const runtime = "edge";
 
