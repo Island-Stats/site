@@ -1,5 +1,5 @@
 import MainSearch from "@/components/core/main-search";
-import NoticeBoard from "@/components/core/notice-board";
+//import NoticeBoard from "@/components/core/notice-board";
 import Error from "@/components/core/error";
 import Favorites from "@/components/core/favorites";
 import Profiles from "@/components/core/profiles";
@@ -80,7 +80,7 @@ export default async function Stats({ params }: { params: { id: string } }) {
 			<main className="grid">
 				<MainSearch />
 				<Error message={error as string} />
-				<NoticeBoard />
+				{/* <NoticeBoard /> */}
 				<Favorites />
 				<Profiles />
 			</main>
