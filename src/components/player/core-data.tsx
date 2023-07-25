@@ -5,7 +5,7 @@ export default function CoreData() {
 	const coins = Math.floor(Math.random() * 1000000);
 	const gems = Math.floor(Math.random() * 1000);
 	// Round champion score to nearest 5
-	const championScore = Math.floor(Math.random() * 1000) * 5;
+	const trophies = Math.floor(Math.random() * 1000) * 5;
 
 	return (
 		<div className="flex flex-col md:flex-row md:space-x-3 justify-center">
@@ -32,11 +32,11 @@ export default function CoreData() {
 				/>
 			</div>
             <div className="flex items-center">
-				<span className="font-bold">{championScore.toLocaleString()}</span>
+				<span className="font-bold">{trophies.toLocaleString()}</span>
 				<Image
-					src="/images/icons/championscore.png"
-					alt="Champion Score"
-                    title="Champion Score"
+					src="/images/icons/trophies.png"
+					alt="Trophies"
+                    title="Trophies"
 					width={16}
 					height={16}
 					className="pixelated w-4 h-4 ml-1"
