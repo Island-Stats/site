@@ -7,11 +7,8 @@ export default function Home() {
 	return (
 		<main className="grid">
 			<MainSearch />
-			{/* @ts-expect-error Async Server Component */}
 			<NoticeBoard />
-			{/* @ts-expect-error Async Server Component */}
 			<Favorites />
-			{/* @ts-expect-error Async Server Component */}
 			<Profiles />
 		</main>
 	);
