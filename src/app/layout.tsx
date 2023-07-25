@@ -2,7 +2,10 @@ import { Metadata } from "next";
 import "./globals.css";
 import NavBar from "@/components/core/nab-bar";
 
+export const runtime = process.env.CF_PAGES ? "edge" : "nodejs";
+
 export const metadata: Metadata = {
+	metadataBase: new URL("https://islandstats.xyz"),
 	title: {
 		template: "%s | Island Stats",
 		default: "Island Stats",
@@ -13,7 +16,6 @@ export const metadata: Metadata = {
 		type: "website",
 		title: "Island Stats",
 		description: "MCC Island stats, data, and more!",
-		url: "https://island.themysterys.com/",
 	},
 	twitter: {
 		card: "summary",
