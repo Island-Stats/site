@@ -80,11 +80,8 @@ export default async function Stats({ params }: { params: { id: string } }) {
 			<main className="grid">
 				<MainSearch />
 				<Error message={error as string} />
-				{/* @ts-expect-error Async Server Component */}
 				<NoticeBoard />
-				{/* @ts-expect-error Async Server Component */}
 				<Favorites />
-				{/* @ts-expect-error Async Server Component */}
 				<Profiles />
 			</main>
 		);
