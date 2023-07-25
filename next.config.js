@@ -13,6 +13,9 @@ const nextConfig = {
 			},
 		];
 	},
+	images: {
+		domains: ['crafatar.com'],
+	},
 };
 
 module.exports = nextConfig;
