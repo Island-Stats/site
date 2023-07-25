@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import "./globals.css";
 import NavBar from "@/components/core/nab-bar";
 
-export const runtime = process.env.CF_PAGES ? "edge" : "nodejs";
+export const runtime = "edge";
 
 export const metadata: Metadata = {
 	metadataBase: new URL("https://islandstats.xyz"),
