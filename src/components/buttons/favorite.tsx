@@ -40,7 +40,7 @@ export default function FavoriteButton({ uuid }: { uuid: string }) {
 		if (favorites.includes(uuid)) {
 			setChecked(true);
 		}
-	}, []);
+	}, [uuid]);
 
 	return (
 		<Tippy
@@ -49,8 +49,9 @@ export default function FavoriteButton({ uuid }: { uuid: string }) {
 		>
 			<button
 				role="checkbox"
+				aria-checked={!checked}
 				onClick={clickFavorite}
-				className="bg-blue-400 mt-4 mr-2 p-1 rounded-full"
+				className="group bg-blue-400 mt-4 mr-2 p-1 rounded-full"
 			>
 				{/* <svg viewBox="0 0 24 24" className="w-5 h-5">
 					<title>Favorite</title>
@@ -73,8 +74,7 @@ export default function FavoriteButton({ uuid }: { uuid: string }) {
 					title="Favorite"
 					width={16}
 					height={16}
-					className="w-5 h-5 pixelated"
-					style={{ filter: (checked ? "none" : "grayscale()") }}
+					className="w-5 h-5 pixelated group-aria-checked:grayscale"
 				/>
 			</button>
 		</Tippy>
