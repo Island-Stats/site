@@ -5,8 +5,8 @@ import { getMojangProfile } from "@/utils/player";
 import Image from "next/image";
 
 export default function Favorites() {
-	const cookieStore = cookies();
-	let favorites = cookieStore.get("favorites");
+	//const cookieStore = cookies();
+	let favorites = undefined //cookieStore.get("favorites");
 
 	if (!favorites || favorites.value == "") {
 		return (
