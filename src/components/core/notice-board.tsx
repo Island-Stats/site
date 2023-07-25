@@ -18,7 +18,12 @@ export default async function NoticeBoard() {
 
 		const title = notice.title;
 		const link = notice.link!.split("?")[0];
-		const body = notice["content:encodedSnippet"].split("\n")[0];
+		const body = notice["content:encodedSnippet"]
+			.split("\n")
+			.filter((line: string) => {
+				line = line.trim();
+				return line.length > 1;
+			})[0];
 		const date = new Date(notice.pubDate!);
 
 		// If notice is older than 2 weeks then don't display it
@@ -29,7 +34,6 @@ export default async function NoticeBoard() {
 		return (
 			<Link
 				href={link}
-				rel="noreferrer"
 				target="_blank"
 				className="group col-span-full py-5 border-2 border-transparent hover:border-sky-500 transition-colors duration-500 text-center"
 			>
