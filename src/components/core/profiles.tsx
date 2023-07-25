@@ -28,7 +28,7 @@ export default function Profiles() {
 				<p className="absolute left-24 top-5 font-semibold text-lg">
 					{player.name}
 				</p>
-				<p className="absolute left-24 top-12 w-56">{profile.message}</p>
+				<p className="absolute left-24 top-12 pr-2">{profile.message}</p>
 			</Link>
 		);
 	});

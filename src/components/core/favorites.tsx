@@ -21,7 +21,7 @@ export default function Favorites() {
 				<p className="absolute left-24 top-5 font-semibold text-lg">
 					No favorites set!
 				</p>
-				<p className="absolute left-24 top-12 w-56">
+				<p className="absolute left-24 top-12 pr-2">
 					Why don{"'"}t you set a favorite?
 				</p>
 			</div>
@@ -41,7 +41,7 @@ export default function Favorites() {
 					<p className="absolute left-24 top-5 font-semibold text-lg">
 						{player.name}
 					</p>
-					<p className="absolute left-24 top-12 w-56">
+					<p className="absolute left-24 top-12 pr-2">
 						Last online will go here
 					</p>
 				</Link>
