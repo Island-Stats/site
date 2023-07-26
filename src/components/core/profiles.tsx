@@ -22,13 +22,13 @@ export default function Profiles() {
 			<Link
 				key={profile.uuid}
 				href={"/player/" + profile.uuid}
-				className="inline-block p-5 border-2 border-transparent hover:border-sky-500 transition-colors duration-500"
+				className="grid grid-cols-4 grid-rows-2 space-x-2 p-5 border-2 border-transparent hover:border-sky-500 transition-colors duration-500"
 			>
 				<PlayerHead {...{ uuid: profile.uuid, username: player.name }} />
-				<p className="absolute left-24 top-5 font-semibold text-lg">
+				<p className="font-semibold text-lg col-span-3 my-auto">
 					{player.name}
 				</p>
-				<p className="absolute left-24 top-12 pr-2">{profile.message}</p>
+				<p className="pr-2 col-span-3 my-auto">{profile.message}</p>
 			</Link>
 		);
 	});

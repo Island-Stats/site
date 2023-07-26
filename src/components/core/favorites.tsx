@@ -6,22 +6,22 @@ import Image from "next/image";
 
 export default function Favorites() {
 	//const cookieStore = cookies();
-	let favorites = {value: ""}; //cookieStore.get("favorites");
+	let favorites = { value: "" }; //cookieStore.get("favorites");
 
 	if (!favorites || favorites.value == "") {
 		return (
-			<div className="relative inline-block p-5">
+			<div className="relative p-5 grid grid-cols-4 grid-rows-2 space-x-2">
 				<Image
 					alt="question mark player head"
 					src={"/images/q.png"}
-					className="rounded-md pixelated"
+					className="rounded-md pixelated row-span-2 m-auto"
 					width={64}
 					height={64}
 				/>
-				<p className="absolute left-24 top-5 font-semibold text-lg">
+				<p className="font-semibold text-lg col-span-3">
 					No favorites set!
 				</p>
-				<p className="absolute left-24 top-12 pr-2">
+				<p className="pr-2 col-span-3">
 					Why don{"'"}t you set a favorite?
 				</p>
 			</div>
@@ -35,13 +35,13 @@ export default function Favorites() {
 				<Link
 					key={uuid}
 					href={"/player/" + uuid}
-					className="inline-block p-5 border-2 border-transparent hover:border-sky-500 transition-colors duration-500"
+					className="grid grid-cols-4 grid-rows-2 space-x-2 p-5 border-2 border-transparent hover:border-sky-500 transition-colors duration-500"
 				>
 					<PlayerHead {...{ uuid, username: player.name }} />
-					<p className="absolute left-24 top-5 font-semibold text-lg">
+					<p className="font-semibold text-lg col-span-3 my-auto">
 						{player.name}
 					</p>
-					<p className="absolute left-24 top-12 pr-2">
+					<p className="pr-2 col-span-3 my-auto">
 						Last online will go here
 					</p>
 				</Link>
