@@ -32,7 +32,7 @@ export default function Faction() {
 	// Pick a faction
 	const faction = factions[Math.floor(Math.random() * factions.length)];
 	// Pick a number between 0 and 100_000 exclusive
-    const current = Math.floor(Math.random() * 100_000);
+	const current = Math.floor(Math.random() * 100_000);
 
 	return (
 		<ProgressBar
@@ -41,9 +41,9 @@ export default function Faction() {
 				level,
 				current,
 				max: 100_000,
-                suffix: "XP",
+				suffix: "XP",
 				icon: `factions/${faction}.png`,
-				iconHover: (<div className="text-center">{factionsNames[faction]} <br /> Prestige: 0</div>),
+				iconHover: { factionName: factionsNames[faction], prestige: 0 },
 			}}
 		/>
 	);
