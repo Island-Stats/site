@@ -51,10 +51,8 @@ export default function PlayerCount() {
 
 	if (loading) {
 		return (
-			<>
-				<div ref={refs.setReference} className="ml-auto mr-4">
-					Loading...
-				</div>
+			<div ref={refs.setReference} className="ml-auto mr-4">
+				Loading...
 				{isOpen && (
 					<div ref={refs.setFloating} style={floatingStyles}>
 						<div className="bg-neutral-800 p-2 rounded-md">
@@ -67,7 +65,7 @@ export default function PlayerCount() {
 						/>
 					</div>
 				)}
-			</>
+			</div>
 		);
 	}
 
@@ -76,17 +74,28 @@ export default function PlayerCount() {
 			<Link
 				href={"https://status.mccisland.net/"}
 				target="_blank"
+				ref={refs.setReference}
 				className="ml-auto mr-4"
 			>
 				Server Offline
+				{isOpen && (
+					<div ref={refs.setFloating} style={floatingStyles}>
+						<div className="bg-neutral-800 p-2 rounded-md">
+							Click for more info.
+						</div>
+						<FloatingArrow
+							ref={arrowRef}
+							context={context}
+							className="fill-sky-500"
+						/>
+					</div>
+				)}
 			</Link>
 		);
 	} else {
 		return (
-			<>
-				<div ref={refs.setReference} className="ml-auto mr-4">
-					{current} Online
-				</div>
+			<div ref={refs.setReference} className="ml-auto mr-4">
+				{current} Online
 				{isOpen && (
 					<div ref={refs.setFloating} style={floatingStyles}>
 						<div className="bg-neutral-800 p-2 rounded-md">
@@ -99,7 +108,7 @@ export default function PlayerCount() {
 						/>
 					</div>
 				)}
-			</>
+			</div>
 		);
 	}
 }

@@ -6,7 +6,14 @@ import Profiles from "@/components/core/profiles";
 import Rank from "@/components/player/rank";
 import FavoriteButton from "@/components/buttons/favorite";
 import ShareButton from "@/components/buttons/share";
-import { PlayerData, Size, getMojangProfile, getPlayerData, getPlayerHead, isValidPlayer } from "@/utils/player";
+import {
+	PlayerData,
+	Size,
+	getMojangProfile,
+	getPlayerData,
+	getPlayerHead,
+	isValidPlayer,
+} from "@/utils/player";
 import { Metadata } from "next";
 import Faction from "@/components/player/faction";
 import TGTTOS from "@/components/stats/tgttos";
@@ -27,11 +34,14 @@ export async function generateMetadata({
 		return {};
 	}
 
+	title = `${player.name} | Island Stats`;
+
 	return {
 		title: `${player.name}`,
 		icons: {
 			icon: getPlayerHead(player.id, Size.small),
 		},
+		description: `${player.name}'s MCC Island stats.`,
 		openGraph: {
 			title,
 			images: [
@@ -39,7 +49,7 @@ export async function generateMetadata({
 					url: getPlayerHead(player.id, Size.full),
 				},
 			],
-			description: "",
+			description: `${player.name}'s MCC Island stats.`,
 			type: "profile",
 			username: player.name,
 			siteName: "Island Stats",
@@ -104,7 +114,7 @@ export default async function Stats({ params }: { params: { id: string } }) {
 					className="flex flex-wrap justify-items-center gap-3 py-5 text-2xl md:text-4xl"
 				>
 					<span>Stats for</span>
-					<Rank rank={(playerData?.rank ?? "player")} />
+					<Rank rank={playerData?.rank ?? "player"} />
 					<span className="font-semibold">{player.name}</span>
 					<div className="w-full text-sm">
 						<FavoriteButton uuid={player.id} />
@@ -120,15 +130,37 @@ export default async function Stats({ params }: { params: { id: string } }) {
 						<CoreData />
 					</div>
 				</div>
-				<div id="stats" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-2 gap-y-5 mt-4">
+				<div
+					id="stats"
+					className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-2 gap-y-5 mt-4"
+				>
 					<div className="col-span-full flex flex-col md:flex-row md:items-end">
-					<p className="text-2xl md:text-4xl font-semibold pr-1">Game Stats</p>
-					<p className="text-neutral-400 text-base">Total games played: {data.games_played?.toLocaleString() ?? 0}</p>
+						<p className="text-2xl md:text-4xl font-semibold pr-1">
+							Game Stats
+						</p>
+						<p className="text-neutral-400 text-base">
+							Total games played:{" "}
+							{data.games_played?.toLocaleString() ?? 0}
+						</p>
 					</div>
-					<TGTTOS data={data.tgttos as PlayerData["data"]["tgttos"]} />
-					<HoleInTheWall data={data.hole_in_the_wall as PlayerData["data"]["hole_in_the_wall"]} />
-					<SkyBattle data={data.sky_battle as PlayerData["data"]["sky_battle"]} />
-					<BattleBox data={data.battle_box as PlayerData["data"]["battle_box"]} />
+					<TGTTOS
+						data={data.tgttos as PlayerData["data"]["tgttos"]}
+					/>
+					<HoleInTheWall
+						data={
+							data.hole_in_the_wall as PlayerData["data"]["hole_in_the_wall"]
+						}
+					/>
+					<SkyBattle
+						data={
+							data.sky_battle as PlayerData["data"]["sky_battle"]
+						}
+					/>
+					<BattleBox
+						data={
+							data.battle_box as PlayerData["data"]["battle_box"]
+						}
+					/>
 				</div>
 			</main>
 		);
