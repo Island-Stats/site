@@ -97,7 +97,7 @@ export type PlayerData = {
 };
 
 export async function getPlayerData(id: string): Promise<PlayerData | undefined> {
-	const response = await fetch(`http://localhost:3000/files/${id}.json`, {
+	const response = await fetch(`https://islandstats.xyz/files/${id}.json`, {
 		next: {
 			revalidate: 0, // Cache for 5 minutes
 		},
@@ -107,7 +107,7 @@ export async function getPlayerData(id: string): Promise<PlayerData | undefined>
 }
 
 export async function isValidPlayer(id: string): Promise<boolean> {
-	const response = await fetch(`http://localhost:3000/files/${id}.json`, {
+	const response = await fetch(`https://islandstats.xyz/files/${id}.json`, {
 		next: {
 			revalidate: 0, // Cache for 5 minutes
 		},
