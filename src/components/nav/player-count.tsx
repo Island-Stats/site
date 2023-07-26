@@ -1,8 +1,16 @@
 "use client";
 
-import Tippy from "@tippyjs/react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import {
+	FloatingArrow,
+	arrow,
+	autoPlacement,
+	autoUpdate,
+	offset,
+	useFloating,
+	useHover,
+} from "@floating-ui/react";
 
 export const revalidate = 60 * 5; // 5 minutes
 
@@ -11,6 +19,24 @@ export default function PlayerCount() {
 	const [max, setMax] = useState(0);
 	const [online, setOnline] = useState(false);
 	const [loading, setLoading] = useState(true);
+
+	const [isOpen, setIsOpen] = useState(false);
+	const arrowRef = useRef(null);
+	const { refs, floatingStyles, context } = useFloating({
+		open: isOpen,
+		onOpenChange: setIsOpen,
+		middleware: [
+			offset(10),
+			arrow({
+				element: arrowRef,
+			}),
+			autoPlacement({
+				allowedPlacements: ["bottom", "bottom-end"],
+			}),
+		],
+		whileElementsMounted: autoUpdate,
+	});
+	useHover(context);
 
 	useEffect(() => {
 		fetch("https://mcapi.us/server/status?port=25565&ip=play.mccisland.net")
@@ -25,29 +51,55 @@ export default function PlayerCount() {
 
 	if (loading) {
 		return (
-			<Tippy content="Loading player count">
-				<div className="ml-auto mr-4">Loading...</div>
-			</Tippy>
+			<>
+				<div ref={refs.setReference} className="ml-auto mr-4">
+					Loading...
+				</div>
+				{isOpen && (
+					<div ref={refs.setFloating} style={floatingStyles}>
+						<div className="bg-neutral-800 p-2 rounded-md">
+							Loading player count.
+						</div>
+						<FloatingArrow
+							ref={arrowRef}
+							context={context}
+							className="fill-sky-500"
+						/>
+					</div>
+				)}
+			</>
 		);
 	}
 
 	if (!online) {
 		return (
-			<Tippy content="Check the status page by clicking here">
-				<Link
-					href={"https://status.mccisland.net/"}
-					target="_blank"
-					className="ml-auto mr-4"
-				>
-					Server Offline
-				</Link>
-			</Tippy>
+			<Link
+				href={"https://status.mccisland.net/"}
+				target="_blank"
+				className="ml-auto mr-4"
+			>
+				Server Offline
+			</Link>
 		);
 	} else {
 		return (
-			<Tippy content={`${current} / ${max}`}>
-				<div className="ml-auto mr-4">{current} Online</div>
-			</Tippy>
+			<>
+				<div ref={refs.setReference} className="ml-auto mr-4">
+					{current} Online
+				</div>
+				{isOpen && (
+					<div ref={refs.setFloating} style={floatingStyles}>
+						<div className="bg-neutral-800 p-2 rounded-md">
+							{current} / {max}
+						</div>
+						<FloatingArrow
+							ref={arrowRef}
+							context={context}
+							className="fill-sky-500"
+						/>
+					</div>
+				)}
+			</>
 		);
 	}
 }
