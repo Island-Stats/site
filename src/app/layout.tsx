@@ -11,16 +11,31 @@ export const metadata: Metadata = {
 		default: "Island Stats",
 	},
 	description: "MCC Island stats, data, and more!",
+	keywords: ["MCC", "Minecraft", "Island", "Stats", "Data"],
 	themeColor: "#60a5fa",
 	openGraph: {
 		type: "website",
 		title: "Island Stats",
 		description: "MCC Island stats, data, and more!",
+		images: [
+			{
+				url: "https://islandstats.xyz/images/icons/logo-big.png",
+				width: 512,
+				height: 512,
+			},
+		],
 	},
 	twitter: {
 		card: "summary",
 		title: "Island Stats",
 		description: "MCC Island stats, data, and more!",
+		images: [
+			{
+				url: "https://islandstats.xyz/images/icons/logo-big.png",
+				width: 512,
+				height: 512,
+			},
+		],
 	},
 };
 
