@@ -27,6 +27,10 @@ export default function About() {
 					yourself, your friends or anyone in between.
 				</p>
 				<p>
+					Want to help contribute? Check out the github repo{" "}
+					<Link href={"https://github.com/Island-Stats/site"}>here</Link>.
+				</p>
+				<p>
 					Design inspired by{" "}
 					<Link href={"https://sky.shiiyu.moe/"}>SkyCrypt</Link>.
 				</p>
