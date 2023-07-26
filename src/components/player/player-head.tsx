@@ -6,7 +6,7 @@ export default function PlayerHead({ uuid, username }: { uuid: string, username:
 		<Image
 			alt={`${username}'s player head`}
 			src={getPlayerHead(uuid)}
-			className="rounded-md pixelated"
+			className="rounded-md pixelated m-auto"
 			width={64}
 			height={64}
 		/>

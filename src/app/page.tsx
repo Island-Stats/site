@@ -8,6 +8,15 @@ export default function Home() {
 		<main className="grid">
 			<MainSearch />
 			{/* <NoticeBoard /> */}
+			<div
+				className="group col-span-full py-5 text-center"
+			>
+				<p className="text-neutral-200 text-xl font-bold transition-colors">
+					Site preview
+				</p>
+				<p className="text-neutral-200">This is a preview of what Island Stats will hopefully be in the future once an MCC Island API is released to the public.</p>
+				<p className="text-neutral-200 font-semibold">Only the below profiles contain stats</p>
+			</div>
 			<Favorites />
 			<Profiles />
 		</main>
