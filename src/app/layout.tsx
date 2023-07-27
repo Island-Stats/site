@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import "./globals.css";
 import NavBar from "@/components/nav/nab-bar";
+import Script from "next/script";
 
 export const runtime = "edge";
 
@@ -34,6 +35,19 @@ export default function RootLayout({
 			<body>
 				<NavBar />
 				{children}
+				<>
+					<Script
+						async
+						src="https://www.googletagmanager.com/gtag/js?id=G-T7B6GR01E3"
+					/>
+					<Script id="google-analytics">
+						{`window.dataLayer = window.dataLayer || [];
+						function gtag(){dataLayer.push(arguments);}
+						gtag('js', new Date());
+
+						gtag('config', 'G-T7B6GR01E3');`}
+					</Script>
+				</>
 			</body>
 		</html>
 	);
