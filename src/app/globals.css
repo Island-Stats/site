@@ -115,6 +115,12 @@ main.grid > * {
 	padding: 14px 30px;
 	line-height: initial;
 	--clip-center: 256px 0;
+	@media(max-width: 725px) {
+		left: 20px;
+		right: 20px;
+		width: unset;
+		--clip-center: 50% 0;
+	}
 }
 
 .expander[aria-expanded="true"] + .expandable {
