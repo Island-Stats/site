@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+export const runtime = "nodejs";
+
 export default function NotFound() {
 	return (
 		<div className="flex flex-col mt-32 backdrop-blur-md backdrop-brightness-50 backdrop-filter items-center justify-center w-[50%] mx-auto rounded-md p-5">
