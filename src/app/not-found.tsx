@@ -1,10 +1,8 @@
 import Link from "next/link";
 
-export const runtime = "nodejs";
-
 export default function NotFound() {
 	return (
-		<div className="flex flex-col items-center justify-center w-full h-full">
+		<div className="flex flex-col mt-32 backdrop-blur-md backdrop-brightness-50 backdrop-filter items-center justify-center w-[50%] mx-auto rounded-md p-5">
 			<h1 className="text-4xl font-bold">404</h1>
 			<h2 className="text-2xl font-semibold">Page not found</h2>
 			<Link
