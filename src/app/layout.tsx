@@ -3,8 +3,6 @@ import "./globals.css";
 import NavBar from "@/components/nav/nab-bar";
 import Script from "next/script";
 
-export const runtime = "edge";
-
 export const metadata: Metadata = {
 	metadataBase: new URL("https://islandstats.xyz"),
 	title: {
