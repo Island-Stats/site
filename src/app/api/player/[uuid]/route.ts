@@ -1,49 +1,82 @@
-import { NextRequest, NextResponse } from "next/server";
+import { Player, playerModel } from "@/utils/mongoose";
+import { getMojangProfile } from "@/utils/player";
+import { NextResponse } from "next/server";
 
-export async function POST(request: Request) {
+const revalidateTime = 5 * 60; // 5 minutes
+
+export async function POST(
+	request: Request,
+	{ params }: { params: { uuid: string } }
+) {
 	// Get the player's uuid from the url
 	const { searchParams } = new URL(request.url);
-	const uuid = searchParams.get("uuid");
+	const uuid = params.uuid;
 
 	const game = searchParams.get("game");
 
-	const revalidateTime = 30; // 30 seconds
-	let req = await fetch(`http://localhost:3000/files/${uuid}.json`, {
-		cache: "default",	
+	let player = await playerModel.findOne({ uuid }).exec();
 
-	});
+	if (
+		player == null ||
+		Date.now() - player.last_modified! > revalidateTime * 1000 ||
+		process.env.CACHE_ONLY != "true"
+	) {
+		const res = await fetch(`http://localhost:3000/files/${uuid}.json`);
 
-	const lastModified = new Date(req.headers.get("last-modified") ?? 0).getTime();
-	const now = Date.now();
+		if (res.status == 404) {
+			return NextResponse.json(
+				{ error: "Player not found" },
+				{ status: 404 }
+			);
+		}
 
-	console.log("Last modified", lastModified);
-	console.log("Current time", now);
-	console.log("Last modified Human", new Date(lastModified));
-	console.log("Current time Human", new Date(now));
-	console.log(lastModified + revalidateTime * 1000 < now)
+		const resJSON = await res.json();
 
-	if (lastModified + revalidateTime * 1000 < now) {
-		// What does the above line do?
-		// It checks if the last modified time + the revalidate time is less than the current time
-		// If it is, then the cache is stale and we need to revalidate
-		console.log("Cache stale");
+		if (player == null) {
+			if (resJSON.username == undefined) {
+				resJSON.username = (await getMojangProfile(resJSON.uuid))?.name;
+			}
 
-		req = await fetch(`http://localhost:3000/files/${uuid}.json`, {
-			/* next: {
-				revalidate: revalidateTime,
-			}, */
-		});
-	} else {
-		console.log("Cache hit");
+			player = new playerModel({
+				uuid: resJSON.uuid,
+				username: resJSON.username,
+				rank: resJSON.rank,
+				games: resJSON.games,
+				games_played: resJSON.games_played,
+				last_modified: Date.now(),
+			});
+		} else {
+			player.username = resJSON.username;
+			player.rank = resJSON.rank;
+			player.games = resJSON.games;
+			player.games_played = resJSON.games_played;
+			player.last_modified = Date.now();
+		}
+
+		await player.save();
 	}
 
-	const text = await req.text();
-	const json = JSON.parse(text);
-
 	if (game != "" && game != null) {
-		json.data = json.data[game];
+		// Remove games that aren't the requested game but keep the games object
+
+		if (player.games[game] == undefined) {
+			return NextResponse.json(
+				{ error: "Game not found" },
+				{ status: 404 }
+			);
+		}
+
+		const json = {
+			uuid: player.uuid,
+			username: player.username,
+			rank: player.rank,
+			games: { [game]: player.games[game] },
+			games_played: player.games_played,
+			last_modified: player.last_modified,
+		};
+
 		return NextResponse.json(json);
 	}
 
-	return NextResponse.json(json);
+	return NextResponse.json(player);
 }
