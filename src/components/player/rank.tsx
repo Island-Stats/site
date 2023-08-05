@@ -7,7 +7,7 @@ export const Ranks = {
 	creator: "Creator",
 	contestant: "Contestant",
 	vip: "VIP",
-	gc_royal: "Grand Champ Royale",
+	gc_royale: "Grand Champ Royale",
 	grand_champ: "Grand Champ",
 	champ: "Champ",
 	player: "Player",
