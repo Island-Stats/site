@@ -7,7 +7,6 @@ import Rank from "@/components/player/rank";
 import FavoriteButton from "@/components/buttons/favorite";
 import ShareButton from "@/components/buttons/share";
 import {
-	PlayerData,
 	Size,
 	getMojangProfile,
 	getPlayerData,
@@ -16,11 +15,18 @@ import {
 } from "@/utils/player";
 import { Metadata } from "next";
 import Faction from "@/components/player/faction";
-import TGTTOS from "@/components/stats/tgttos";
-import HoleInTheWall from "@/components/stats/hole-in-the-wall";
-import SkyBattle from "@/components/stats/sky-battle";
-import BattleBox from "@/components/stats/battle-box";
+import TGTTOSStats from "@/components/stats/tgttos";
+import HoleInTheWallStats from "@/components/stats/hole-in-the-wall";
+import SkyBattleStats from "@/components/stats/sky-battle";
+import BattleBoxStats from "@/components/stats/battle-box";
 import CoreData from "@/components/player/core-data";
+import {
+	BattleBox,
+	HoleInTheWall,
+	Player,
+	SkyBattle,
+	TGTToS,
+} from "@/utils/mongoose";
 
 export async function generateMetadata({
 	params,
@@ -29,8 +35,14 @@ export async function generateMetadata({
 }): Promise<Metadata> {
 	let title;
 	const player = await getMojangProfile(params.id);
-	const validPlayer = player ? await isValidPlayer(player.id) : false;
-	if (!player || !validPlayer) {
+	const playerDataRes = await fetch(
+		`http://localhost:3000/api/player/${player!.id}`,
+		{ method: "POST" }
+	);
+
+	const playerData = await playerDataRes!.json();
+
+	if (!player || playerData.error) {
 		return {};
 	}
 
@@ -66,6 +78,8 @@ export async function generateMetadata({
 	};
 }
 
+export const revalidate = 0;
+
 export default async function Stats({ params }: { params: { id: string } }) {
 	let error: string | null = null;
 	const player = await getMojangProfile(params.id);
@@ -78,14 +92,20 @@ export default async function Stats({ params }: { params: { id: string } }) {
 		// If "id" was a username then player does not exist
 		error = `Player with username "${params.id}" does not exist.`;
 	}
-	const playerData = player ? await getPlayerData(player.id) : undefined;
 
-	if (!playerData && !error) {
-		error = "Failed to fetch player data.";
+	const playerDataRes = await fetch(
+		`http://localhost:3000/api/player/${player!.id}`,
+		{ method: "POST" }
+	);
+
+	const playerData = await playerDataRes!.json();
+
+	if (playerData.error && !error) {
+		error = "Failed to fetch player games.";
 	}
 
 	// If player exists then display their stats
-	if (!player || !playerData) {
+	if (!player || playerData.error) {
 		return (
 			<main className="grid">
 				<MainSearch />
@@ -96,16 +116,16 @@ export default async function Stats({ params }: { params: { id: string } }) {
 			</main>
 		);
 	} else {
-		let data;
+		let games;
 		if (!playerData) {
-			data = {
+			games = {
 				tgttos: {},
 				hole_in_the_wall: {},
 				sky_battle: {},
 				battle_box: {},
 			};
 		} else {
-			data = playerData.data;
+			games = playerData.games;
 		}
 		return (
 			<main className="backdrop-blur-lg backdrop-brightness-50 w-3/5 mx-auto min-h-full">
@@ -140,27 +160,15 @@ export default async function Stats({ params }: { params: { id: string } }) {
 						</p>
 						<p className="text-neutral-400 text-base">
 							Total games played:{" "}
-							{data.games_played?.toLocaleString() ?? 0}
+							{playerData.games_played?.toLocaleString() ?? 0}
 						</p>
 					</div>
-					<TGTTOS
-						data={data.tgttos as PlayerData["data"]["tgttos"]}
+					<TGTTOSStats games={games!.tgttos as TGTToS} />
+					<HoleInTheWallStats
+						games={games!.hole_in_the_wall as HoleInTheWall}
 					/>
-					<HoleInTheWall
-						data={
-							data.hole_in_the_wall as PlayerData["data"]["hole_in_the_wall"]
-						}
-					/>
-					<SkyBattle
-						data={
-							data.sky_battle as PlayerData["data"]["sky_battle"]
-						}
-					/>
-					<BattleBox
-						data={
-							data.battle_box as PlayerData["data"]["battle_box"]
-						}
-					/>
+					<SkyBattleStats games={games!.sky_battle as SkyBattle} />
+					<BattleBoxStats games={games!.battle_box as BattleBox} />
 				</div>
 			</main>
 		);
