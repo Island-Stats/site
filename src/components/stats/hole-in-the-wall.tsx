@@ -1,10 +1,10 @@
-import { PlayerData } from "@/utils/player";
+import { HoleInTheWall } from "@/utils/mongoose";
 import Image from "next/image";
 
-export default function HoleInTheWall({
-	data,
+export default function HoleInTheWallStats({
+	games,
 }: {
-	data: PlayerData["data"]["hole_in_the_wall"];
+	games: HoleInTheWall;
 }) {
 	return (
 		<div className="flex flex-col mx-auto max-md:text-center">
@@ -21,44 +21,44 @@ export default function HoleInTheWall({
 			<p>
 				First Place:{" "}
 				<span className="text-neutral-400">
-					{data.first_place?.toLocaleString() ?? "-"}
+					{games.first_place?.toLocaleString() ?? "-"}
 				</span>
 			</p>
 			<p>
 				Top Three:{" "}
 				<span className="text-neutral-400">
-					{data.top_three?.toLocaleString() ?? "-"}
+					{games.top_three?.toLocaleString() ?? "-"}
 				</span>
 			</p>
 			<p>
 				Top Five:{" "}
 				<span className="text-neutral-400">
-					{data.top_five?.toLocaleString() ?? "-"}
+					{games.top_five?.toLocaleString() ?? "-"}
 				</span>
 			</p>
 			<p>
 				Top Eight:{" "}
 				<span className="text-neutral-400">
-					{data.top_eight?.toLocaleString() ?? "-"}
+					{games.top_eight?.toLocaleString() ?? "-"}
 				</span>
 			</p>
 			<p>
 				Top 50%:{" "}
 				<span className="text-neutral-400">
-					{data.top_fifty_percent?.toLocaleString() ?? "-"}
+					{games.top_fifty_percent?.toLocaleString() ?? "-"}
 				</span>
 			</p>
 
 			<p>
 				Walls Dodged:{" "}
 				<span className="text-neutral-400">
-					{data.walls_dodged?.toLocaleString() ?? "-"}
+					{games.walls_dodged?.toLocaleString() ?? "-"}
 				</span>
 			</p>
 			<p>
 				Games Played:{" "}
 				<span className="text-neutral-400">
-					{data.games_played?.toLocaleString() ?? "-"}
+					{games.games_played?.toLocaleString() ?? "-"}
 				</span>
 			</p>
 		</div>

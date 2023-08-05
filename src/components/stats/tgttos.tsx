@@ -1,10 +1,10 @@
-import { PlayerData } from "@/utils/player";
+import { TGTToS } from "@/utils/mongoose";
 import Image from "next/image";
 
-export default function TGTTOS({
-	data,
+export default function TGTTOSStats({
+	games,
 }: {
-	data: PlayerData["data"]["tgttos"];
+	games: TGTToS;
 }) {
 	return (
 		<div className="flex flex-col mx-auto max-md:text-center">
@@ -21,73 +21,73 @@ export default function TGTTOS({
 			<p>
 				Round First Place:{" "}
 				<span className="text-neutral-400">
-					{data.round_first_place?.toLocaleString() ?? "-"}
+					{games.round_first_place?.toLocaleString() ?? "-"}
 				</span>
 			</p>
 			<p>
 				Round Top Three:{" "}
 				<span className="text-neutral-400">
-					{data.round_top_three?.toLocaleString() ?? "-"}
+					{games.round_top_three?.toLocaleString() ?? "-"}
 				</span>
 			</p>
 			<p>
 				Round Top Five:{" "}
 				<span className="text-neutral-400">
-					{data.round_top_five?.toLocaleString() ?? "-"}
+					{games.round_top_five?.toLocaleString() ?? "-"}
 				</span>
 			</p>
 			<p>
 				Round Top Eight:{" "}
 				<span className="text-neutral-400">
-					{data.round_top_eight?.toLocaleString() ?? "-"}
+					{games.round_top_eight?.toLocaleString() ?? "-"}
 				</span>
 			</p>
 			<p>
 				Round Top 50%:{" "}
 				<span className="text-neutral-400">
-					{data.round_top_fifty_percent?.toLocaleString() ?? "-"}
+					{games.round_top_fifty_percent?.toLocaleString() ?? "-"}
 				</span>
 			</p>
 			<p>
 				First Place:{" "}
 				<span className="text-neutral-400">
-					{data.first_place?.toLocaleString() ?? "-"}
+					{games.first_place?.toLocaleString() ?? "-"}
 				</span>
 			</p>
 			<p>
 				Top Three:{" "}
 				<span className="text-neutral-400">
-					{data.top_three?.toLocaleString() ?? "-"}
+					{games.top_three?.toLocaleString() ?? "-"}
 				</span>
 			</p>
 			<p>
 				Top Five:{" "}
 				<span className="text-neutral-400">
-					{data.top_five?.toLocaleString() ?? "-"}
+					{games.top_five?.toLocaleString() ?? "-"}
 				</span>
 			</p>
 			<p>
 				Top Eight:{" "}
 				<span className="text-neutral-400">
-					{data.top_eight?.toLocaleString() ?? "-"}
+					{games.top_eight?.toLocaleString() ?? "-"}
 				</span>
 			</p>
 			<p>
 				Top 50%:{" "}
 				<span className="text-neutral-400">
-					{data.top_fifty_percent?.toLocaleString() ?? "-"}
+					{games.top_fifty_percent?.toLocaleString() ?? "-"}
 				</span>
 			</p>
 			<p>
 				Chickens Punched:{" "}
 				<span className="text-neutral-400">
-					{data.chickens_punched?.toLocaleString() ?? "-"}
+					{games.chickens_punched?.toLocaleString() ?? "-"}
 				</span>
 			</p>
 			<p>
 				Games Played:{" "}
 				<span className="text-neutral-400">
-					{data.games_played?.toLocaleString() ?? "-"}
+					{games.games_played?.toLocaleString() ?? "-"}
 				</span>
 			</p>
 		</div>

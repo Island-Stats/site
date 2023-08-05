@@ -1,11 +1,7 @@
-import { PlayerData } from "@/utils/player";
+import { BattleBox } from "@/utils/mongoose";
 import Image from "next/image";
 
-export default function BattleBox({
-	data,
-}: {
-	data: PlayerData["data"]["battle_box"];
-}) {
+export default function BattleBoxStats({ games }: { games: BattleBox }) {
 	return (
 		<div className="flex flex-col mx-auto max-md:text-center">
 			<div className="flex justify-between gap-1 py-1">
@@ -21,43 +17,43 @@ export default function BattleBox({
 			<p>
 				Team First Place:{" "}
 				<span className="text-neutral-400">
-					{data.team_first_place?.toLocaleString() ?? "-"}
+					{games.team_first_place?.toLocaleString() ?? "-"}
 				</span>
 			</p>
 			<p>
 				Team Second Place:{" "}
 				<span className="text-neutral-400">
-					{data.team_second_place?.toLocaleString() ?? "-"}
+					{games.team_second_place?.toLocaleString() ?? "-"}
 				</span>
 			</p>
 			<p>
 				Team Third Place:{" "}
 				<span className="text-neutral-400">
-					{data.team_third_place?.toLocaleString() ?? "-"}
+					{games.team_third_place?.toLocaleString() ?? "-"}
 				</span>
 			</p>
 			<p>
 				Team Fourth Place:{" "}
 				<span className="text-neutral-400">
-					{data.team_fourth_place?.toLocaleString() ?? "-"}
+					{games.team_fourth_place?.toLocaleString() ?? "-"}
 				</span>
 			</p>
 			<p>
 				Team Rounds Won:{" "}
 				<span className="text-neutral-400">
-					{data.team_rounds_won?.toLocaleString() ?? "-"}
+					{games.team_rounds_won?.toLocaleString() ?? "-"}
 				</span>
 			</p>
 			<p>
 				Players Killed:{" "}
 				<span className="text-neutral-400">
-					{data.players_killed?.toLocaleString() ?? "-"}
+					{games.players_killed?.toLocaleString() ?? "-"}
 				</span>
 			</p>
 			<p>
 				Games Played:{" "}
 				<span className="text-neutral-400">
-					{data.games_played?.toLocaleString() ?? "-"}
+					{games.games_played?.toLocaleString() ?? "-"}
 				</span>
 			</p>
 		</div>
