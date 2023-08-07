@@ -9,13 +9,13 @@ import {
 } from "@floating-ui/react";
 import { ReactElement, useRef, useState } from "react";
 
-export default function ProgressBar({
+export default function FactionProgress({
 	title,
 	level,
 	current,
 	max,
 	suffix,
-	icon,
+	faction,
 	iconHover,
 }: {
 	title: string;
@@ -23,10 +23,10 @@ export default function ProgressBar({
 	current: number;
 	max: number;
 	suffix: string;
-	icon?: string;
+	faction?: string;
 	iconHover: {
-		factionName: string;
-		prestige: number;
+		factionName?: string;
+		prestige?: number;
 	};
 }) {
 	const [isOpen, setIsOpen] = useState(false);
@@ -45,63 +45,64 @@ export default function ProgressBar({
 	useHover(context);
 
 	const [hover, setHover] = useState(false);
+
+	// Testing
+	current = 90_000;
+	let lightColor = false;
+
+	switch (faction) {
+		case "aqua":
+		case "lime":
+		case "yellow":
+			lightColor = true;
+			break;
+	}
+
 	return (
 		<div className="relative h-12 text-base">
-			{(icon && iconHover && (
-				<div className="relative w-12 h-12 bg-sky-500 icon-shadow rounded-full z-10">
-					<div
-						ref={refs.setReference}
-						className="absolute top-4 left-4 w-4 h-4 scale-[2] z-10 pixelated"
-						style={{ backgroundImage: `url('/images/${icon}')` }}
-					></div>
-					{isOpen && (
-						<div ref={refs.setFloating} style={floatingStyles}>
-							<div className="bg-neutral-800 p-2 rounded-md text-center whitespace-nowrap">
-								<p>{iconHover.factionName}</p>
-								<p>Prestige: {iconHover.prestige}</p>
-							</div>
-							<FloatingArrow
-								ref={arrowRef}
-								context={context}
-								className="fill-sky-500"
-							/>
-						</div>
-					)}
-				</div>
-			)) ||
-				(icon && (
-					<div className="relative w-12 h-12 bg-sky-500 icon-shadow rounded-full z-10">
-						<div
-							className="absolute top-4 left-4 w-4 h-4 scale-[2] z-10 pixelated"
-							style={{ backgroundImage: `url('/images/${icon}')` }}
-						></div>
-					</div>
-				))}
 			<div
-				className={`absolute ${
-					icon ? "left-14" : "left-7"
-				} top-0 font-bold text-sm`}
+				className="relative w-12 h-12 faction-colors icon-shadow rounded-full z-10"
+				style={{ backgroundColor: `var(--${faction})` }}
 			>
+				<div
+					ref={refs.setReference}
+					className="absolute top-4 left-4 w-4 h-4 scale-[2] z-10 pixelated"
+					style={{ backgroundImage: `url('/images/factions/${faction}.png')` }}
+				></div>
+				{isOpen && (
+					<div ref={refs.setFloating} style={floatingStyles}>
+						<div className="bg-neutral-800 p-2 rounded-md text-center whitespace-nowrap">
+							<p>{iconHover.factionName}</p>
+							<p>Prestige: {iconHover.prestige}</p>
+						</div>
+						<FloatingArrow
+							ref={arrowRef}
+							context={context}
+							className="fill-sky-500"
+						/>
+					</div>
+				)}
+			</div>
+			<div className="absolute left-14 top-0 font-bold text-sm">
 				{title}
 				{level != undefined && (
 					<span className="text-neutral-400"> {level}</span>
 				)}
 			</div>
-			<div
-				className={`absolute left-6 bottom-0 pl-4 right-0 h-6 bg-neutral-600 ${
-					icon ? "rounded-r-md" : "rounded-md"
-				}`}
-			>
+			<div className="absolute left-6 bottom-0 pl-4 right-0 h-6 bg-neutral-600 rounded-r-md ">
 				<div
-					className={`absolute left-0 top-0 bottom-0 bg-sky-500 ${
-						icon ? "rounded-r-md" : "rounded-md"
-					} text-center`}
-					style={{ width: `calc((100% - 20px)*${(current / max).toFixed(4)})` }}
+					className="absolute left-0 top-0 bottom-0 faction-colors rounded-r-md text-center"
+					style={{
+						width: `calc((100% - 20px)*${(current / max).toFixed(4)})`,
+						backgroundColor: `var(--${faction})`,
+					}}
 				></div>
 				<div
 					onMouseOver={() => setHover(true)}
 					onMouseOut={() => setHover(false)}
-					className="absolute left-5 right-0 top-0 bottom-0 text-center font-semibold text-sm"
+					className={`absolute left-5 right-0 top-0 bottom-0 text-center font-semibold text-sm ${
+						lightColor ? "text-black" : "text-white"
+					}`}
 				>
 					{hover
 						? `${current.toLocaleString()} / ${max.toLocaleString()}`

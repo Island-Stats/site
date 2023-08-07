@@ -1,4 +1,4 @@
-import ProgressBar from "./progress-bar";
+import FactionProgress from "./faction-progress";
 
 const factions = [
 	"aqua",
@@ -35,14 +35,14 @@ export default function Faction() {
 	const current = Math.floor(Math.random() * 100_000);
 
 	return (
-		<ProgressBar
+		<FactionProgress
 			{...{
 				title: "Faction Level",
 				level,
 				current,
 				max: 100_000,
 				suffix: "XP",
-				icon: `factions/${faction}.png`,
+				faction,
 				iconHover: { factionName: factionsNames[faction], prestige: 0 },
 			}}
 		/>
