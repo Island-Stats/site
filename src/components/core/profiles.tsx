@@ -12,15 +12,15 @@ const profiles = [
 		message: "Such a smooth mustache",
 	},
 	{
-		uuid: "6817a59a9c914f5eac0301cc9b2fd66e",
+		uuid: "6817a59a9c914f5eac0301cc9b2fd66e", // MrManzo
 		message: "Most Games played before end of closed beta",
 	},
 	{
-		uuid: "a61953e835674760993e7c3037118b9f",
+		uuid: "a61953e835674760993e7c3037118b9f", // HackedByReamery
 		message: "A crystal in a cave",
 	},
 	{
-		uuid: "e01d8da3993941dc98d8cec81d6a92d2",
+		uuid: "e01d8da3993941dc98d8cec81d6a92d2", // Flameri
 		message: "Just some flames in a robe",
 	},
 ];
