@@ -1,10 +1,9 @@
-import { SkyBattle } from "@/utils/mongoose";
 import Image from "next/image";
 
 export default function SkyBattleStats({
 	games,
 }: {
-	games: SkyBattle;
+	games: any;
 }) {
 	return (
 		<div className="flex flex-col mx-auto max-md:text-center">

@@ -1,10 +1,9 @@
-import { TGTToS } from "@/utils/mongoose";
 import Image from "next/image";
 
 export default function TGTTOSStats({
 	games,
 }: {
-	games: TGTToS;
+	games: any;
 }) {
 	return (
 		<div className="flex flex-col mx-auto max-md:text-center">

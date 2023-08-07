@@ -1,10 +1,9 @@
-import { HoleInTheWall } from "@/utils/mongoose";
 import Image from "next/image";
 
 export default function HoleInTheWallStats({
 	games,
 }: {
-	games: HoleInTheWall;
+	games: any;
 }) {
 	return (
 		<div className="flex flex-col mx-auto max-md:text-center">

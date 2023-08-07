@@ -1,7 +1,6 @@
-import { BattleBox } from "@/utils/mongoose";
 import Image from "next/image";
 
-export default function BattleBoxStats({ games }: { games: BattleBox }) {
+export default function BattleBoxStats({ games }: { games: any }) {
 	return (
 		<div className="flex flex-col mx-auto max-md:text-center">
 			<div className="flex justify-between gap-1 py-1">
