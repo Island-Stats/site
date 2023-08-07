@@ -45,6 +45,19 @@
 	--yellow: #ffdb29;
 }
 
+:root .faction-colors {
+	--red: #fc5453;
+	--orange: #fca800;
+	--yellow: #fcfc54;
+	--lime: #54fc54;
+	--green: #00a800;
+	--blue: #5486fc;
+	--cyan: #00b997;
+	--aqua: #54dafc;
+	--purple: #8632fc;
+	--pink: #fc54fc;
+}
+
 @media (prefers-color-scheme: dark) {
 	:root {
 		--foreground-rgb: 255, 255, 255;
