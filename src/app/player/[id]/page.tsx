@@ -20,13 +20,6 @@ import HoleInTheWallStats from "@/components/stats/hole-in-the-wall";
 import SkyBattleStats from "@/components/stats/sky-battle";
 import BattleBoxStats from "@/components/stats/battle-box";
 import CoreData from "@/components/player/core-data";
-import {
-	BattleBox,
-	HoleInTheWall,
-	Player,
-	SkyBattle,
-	TGTToS,
-} from "@/utils/mongoose";
 
 export async function generateMetadata({
 	params,
@@ -154,21 +147,8 @@ export default async function Stats({ params }: { params: { id: string } }) {
 					id="stats"
 					className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-2 gap-y-5 mt-4"
 				>
-					<div className="col-span-full flex flex-col md:flex-row md:items-end">
-						<p className="text-2xl md:text-4xl font-semibold pr-1">
-							Game Stats
-						</p>
-						<p className="text-neutral-400 text-base">
-							Total games played:{" "}
-							{playerData.games_played?.toLocaleString() ?? 0}
-						</p>
-					</div>
-					<TGTTOSStats games={games!.tgttos as TGTToS} />
-					<HoleInTheWallStats
-						games={games!.hole_in_the_wall as HoleInTheWall}
-					/>
-					<SkyBattleStats games={games!.sky_battle as SkyBattle} />
-					<BattleBoxStats games={games!.battle_box as BattleBox} />
+					Will contain core stats about the player
+					
 				</div>
 			</main>
 		);
