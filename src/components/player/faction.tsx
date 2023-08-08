@@ -54,7 +54,7 @@ export default function Faction() {
 					suffix: "XP",
 					faction: factions[1],
 					factionName: factionsNames[factions[1]],
-					prestige: 1,
+					prestige: 0,
 				}}
 			/>
 			<FactionProgress
@@ -65,7 +65,7 @@ export default function Faction() {
 					suffix: "XP",
 					faction: factions[2],
 					factionName: factionsNames[factions[2]],
-					prestige: 2,
+					prestige: 0,
 				}}
 			/>
 			<FactionProgress
@@ -76,7 +76,7 @@ export default function Faction() {
 					suffix: "XP",
 					faction: factions[3],
 					factionName: factionsNames[factions[3]],
-					prestige: 3,
+					prestige: 0,
 				}}
 			/>
 			<FactionProgress
@@ -87,7 +87,7 @@ export default function Faction() {
 					suffix: "XP",
 					faction: factions[4],
 					factionName: factionsNames[factions[4]],
-					prestige: 4,
+					prestige: 0,
 				}}
 			/>
 			<FactionProgress
@@ -98,18 +98,18 @@ export default function Faction() {
 					suffix: "XP",
 					faction: factions[5],
 					factionName: factionsNames[factions[5]],
-					prestige: 5,
+					prestige: 0,
 				}}
 			/>
 			<FactionProgress
 				{...{
-					level: level(),
+					level: level()+30,
 					current: current(),
 					max: 100_000,
 					suffix: "XP",
 					faction: factions[6],
 					factionName: factionsNames[factions[6]],
-					prestige: 6,
+					prestige: 1,
 				}}
 			/>
 			<FactionProgress
@@ -120,7 +120,7 @@ export default function Faction() {
 					suffix: "XP",
 					faction: factions[7],
 					factionName: factionsNames[factions[7]],
-					prestige: 7,
+					prestige: 0,
 				}}
 			/>
 			<FactionProgress
@@ -131,7 +131,7 @@ export default function Faction() {
 					suffix: "XP",
 					faction: factions[8],
 					factionName: factionsNames[factions[8]],
-					prestige: 8,
+					prestige: 0,
 				}}
 			/>
 			<FactionProgress
@@ -142,7 +142,7 @@ export default function Faction() {
 					suffix: "XP",
 					faction: factions[9],
 					factionName: factionsNames[factions[9]],
-					prestige: 9,
+					prestige: 0,
 				}}
 			/>
 		</>
