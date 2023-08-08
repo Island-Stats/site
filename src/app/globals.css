@@ -52,15 +52,25 @@
 
 :root .faction-colors {
 	--red: #fc5453;
+	--red-dark: #973232;
 	--orange: #fca800;
+	--orange-dark: #976500;
 	--yellow: #fcfc54;
+	--yellow-dark: #979732;
 	--lime: #54fc54;
+	--lime-dark: #329732;
 	--green: #00a800;
-	--blue: #5486fc;
+	--green-dark: #006500;
 	--cyan: #00b997;
+	--cyan-dark: #006f5b;
 	--aqua: #54dafc;
+	--aqua-dark: #328397;
+	--blue: #5486fc;
+	--blue-dark: #325097;
 	--purple: #8632fc;
+	--purple-dark: #501e97;
 	--pink: #fc54fc;
+	--pink-dark: #973297;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -90,11 +100,11 @@ main {
 	padding-bottom: max(20px, env(safe-area-inset-bottom));
 	padding-left: max(20px, env(safe-area-inset-left));
 	padding-right: max(20px, env(safe-area-inset-right));
-	
-	@media(max-width: 1200px) {
+
+	@media (max-width: 1200px) {
 		grid-template-columns: 350px 350px;
 	}
-	@media(max-width: 772px) {
+	@media (max-width: 772px) {
 		grid-template-columns: 1fr;
 	}
 }
@@ -133,7 +143,7 @@ main.grid > * {
 	padding: 14px 30px;
 	line-height: initial;
 	--clip-center: 256px 0;
-	@media(max-width: 725px) {
+	@media (max-width: 725px) {
 		left: 20px;
 		right: 20px;
 		width: unset;
@@ -168,7 +178,7 @@ main.grid > * {
 	color: var(--icon-hex);
 }
 
-.expandable a:hover{
+.expandable a:hover {
 	text-decoration: underline;
 }
 
@@ -179,3 +189,4 @@ main.grid > * {
 .icon-shadow {
 	filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.4));
 }
+
