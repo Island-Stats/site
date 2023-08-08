@@ -10,24 +10,21 @@ import {
 import { ReactElement, useRef, useState } from "react";
 
 export default function FactionProgress({
-	title,
 	level,
 	current,
 	max,
 	suffix,
 	faction,
-	iconHover,
+	factionName,
+	prestige,
 }: {
-	title: string;
-	level?: number;
+	level: number;
 	current: number;
 	max: number;
 	suffix: string;
 	faction?: string;
-	iconHover: {
-		factionName?: string;
-		prestige?: number;
-	};
+	factionName?: string;
+	prestige?: number;
 }) {
 	const [isOpen, setIsOpen] = useState(false);
 	const arrowRef = useRef(null);
@@ -46,18 +43,6 @@ export default function FactionProgress({
 
 	const [hover, setHover] = useState(false);
 
-	// Testing
-	current = 90_000;
-	let lightColor = false;
-
-	switch (faction) {
-		case "aqua":
-		case "lime":
-		case "yellow":
-			lightColor = true;
-			break;
-	}
-
 	return (
 		<div className="relative h-12 text-base">
 			<div
@@ -66,32 +51,25 @@ export default function FactionProgress({
 			>
 				<div
 					ref={refs.setReference}
-					className="absolute top-4 left-4 w-4 h-4 scale-[2] z-10 pixelated"
-					style={{ backgroundImage: `url('/images/factions/${faction}.png')` }}
+					className="absolute top-4 left-3 w-6 h-4 scale-[1.75] pixelated"
+					style={{
+						backgroundImage: `url('/images/factions/${faction}/${prestige}.png')`,
+						backgroundRepeat: "no-repeat",
+					}}
 				></div>
-				{isOpen && (
-					<div ref={refs.setFloating} style={floatingStyles}>
-						<div className="bg-neutral-800 p-2 rounded-md text-center whitespace-nowrap">
-							<p>{iconHover.factionName}</p>
-							<p>Prestige: {iconHover.prestige}</p>
-						</div>
-						<FloatingArrow
-							ref={arrowRef}
-							context={context}
-							className="fill-sky-500"
-						/>
-					</div>
-				)}
 			</div>
 			<div className="absolute left-14 top-0 font-bold text-sm">
-				{title}
-				{level != undefined && (
-					<span className="text-neutral-400"> {level}</span>
-				)}
+				Faction Level
+				<span className="text-neutral-300"> {level}</span>
 			</div>
-			<div className="absolute left-6 bottom-0 pl-4 right-0 h-6 bg-neutral-600 rounded-r-md ">
+			<div
+				className="absolute left-6 bottom-0 pl-4 right-0 h-6 rounded-r-md faction-colors mcc-colors"
+				style={{
+					backgroundColor: `var(--${faction}-dark)`,
+				}}
+			>
 				<div
-					className="absolute left-0 top-0 bottom-0 faction-colors rounded-r-md text-center"
+					className="absolute left-0 top-0 bottom-0 rounded-r-md text-center"
 					style={{
 						width: `calc((100% - 20px)*${(current / max).toFixed(4)})`,
 						backgroundColor: `var(--${faction})`,
@@ -100,9 +78,7 @@ export default function FactionProgress({
 				<div
 					onMouseOver={() => setHover(true)}
 					onMouseOut={() => setHover(false)}
-					className={`absolute left-5 right-0 top-0 bottom-0 text-center font-semibold text-sm ${
-						lightColor ? "text-black" : "text-white"
-					}`}
+					className={`absolute left-5 right-0 top-0 bottom-0 text-center font-bold text-sm text-black`}
 				>
 					{hover
 						? `${current.toLocaleString()} / ${max.toLocaleString()}`
@@ -124,6 +100,19 @@ export default function FactionProgress({
 					{suffix}
 				</div>
 			</div>
+			{isOpen && (
+				<div ref={refs.setFloating} style={floatingStyles} className="z-20">
+					<div className="bg-neutral-800 p-2 rounded-md text-center whitespace-nowrap">
+						<p>{factionName}</p>
+						<p>Prestige: {prestige}</p>
+					</div>
+					<FloatingArrow
+						ref={arrowRef}
+						context={context}
+						className="fill-sky-500"
+					/>
+				</div>
+			)}
 		</div>
 	);
 }
