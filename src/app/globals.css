@@ -32,17 +32,22 @@
 }
 
 :root .mcc-colors {
-	--noxcrew: #e93c3c;
-	--admin: #e93c3c;
-	--mod: #b337ff;
-	--creator: #ef2793;
-	--contestant: #ef2793;
-	--vip: #ef2793;
-	--gc_royale: #fd7e00;
-	--grand_champ: #009ddb;
-	--champ: #2bc804;
-	/* Website colors */
-	--yellow: #ffdb29;
+	--noxcrew: #e63b3b;
+	--admin: #e63b3b;
+	--mod: #b136fc;
+	--creator: #ec2791;
+	--contestant: #ec2791;
+	--vip: #ec2791;
+	--gc_royale: #fcc500;
+	--grand_champ: #00edfc;
+	--champ: #84eb34;
+	/* Rarity colors */
+	--common: #fcfcfc;
+	--uncommon: #1efc00;
+	--rare: #006ffc;
+	--epic: #a134eb;
+	--legendary: #fc7e00;
+	--mythic: #f64141;
 }
 
 :root .faction-colors {
