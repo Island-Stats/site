@@ -1,4 +1,4 @@
-import db from "@/utils/mongodb";
+import clientPromise from "@/utils/mongodb";
 import { getMojangProfile } from "@/utils/player";
 import { NextResponse } from "next/server";
 
@@ -14,16 +14,24 @@ export async function POST(
 
 	const game = searchParams.get("game");
 
-	const playerCollection = db.collection("players");
+	let dbOffline = false;
+	let playerCollection;
+	let player;
 
-	let player = await playerCollection.findOne({ uuid });
+	try {
+		const db = (await clientPromise).db(process.env.MONGODB_DB);
+		playerCollection = db.collection("players");
 
-	console.log();
+		player = await playerCollection.findOne({ uuid });
+	} catch {
+		dbOffline = true;
+	}
 
 	if (
 		(player == null ||
 			Date.now() - player.last_modified! > revalidateTime * 1000) &&
-		process.env.CACHE_ONLY != "true"
+		process.env.CACHE_ONLY != "true" &&
+		dbOffline
 	) {
 		const res = await fetch(`http://localhost:3000/files/${uuid}.json`);
 
@@ -40,15 +48,17 @@ export async function POST(
 		player = resJSON;
 		player!.last_modified = Date.now();
 
-		const result = await playerCollection.updateOne(
-			{ uuid },
-			{ $set: player },
-			{ upsert: true }
-		);
+		try {
+			const result = await playerCollection!.updateOne(
+				{ uuid },
+				{ $set: player },
+				{ upsert: true }
+			);
 
-		if (result.upsertedId) {
-			player!._id = result.upsertedId;
-		}
+			if (result.upsertedId) {
+				player!._id = result.upsertedId;
+			}
+		} catch {}
 	}
 
 	if (player == null) {
