@@ -39,7 +39,8 @@ export default function PlayerCount() {
 	useHover(context);
 
 	useEffect(() => {
-		fetch("https://mcapi.us/server/status?port=25565&ip=play.mccisland.net")
+		try {
+			fetch("https://mcapi.us/server/status?port=25565&ip=play.mccisland.net")
 			.then((res) => res.json())
 			.then((data) => {
 				setCurrent(data.players.now);
@@ -47,6 +48,12 @@ export default function PlayerCount() {
 				setOnline(data.server.protocol >= 762);
 				setLoading(false);
 			});
+		} catch(e) {	
+			setCurrent(0);
+			setMax(0);
+			setOnline(false);
+			setLoading(false);
+		}
 	}, []);
 
 	if (loading) {
