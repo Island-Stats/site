@@ -1,4 +1,4 @@
-import FactionProgress from "./faction-progress";
+import FactionBar from "../bars/faction-bar";
 
 const factions = [
 	"red",
@@ -35,7 +35,7 @@ export default function Faction() {
 	return (
 		<>
 			<h1 className="text-2xl font-bold col-span-2">Faction Levels</h1>
-			<FactionProgress
+			<FactionBar
 				{...{
 					level: level(),
 					current: current(),
@@ -46,7 +46,7 @@ export default function Faction() {
 					prestige: 0,
 				}}
 			/>
-			<FactionProgress
+			<FactionBar
 				{...{
 					level: level(),
 					current: current(),
@@ -57,7 +57,7 @@ export default function Faction() {
 					prestige: 0,
 				}}
 			/>
-			<FactionProgress
+			<FactionBar
 				{...{
 					level: level(),
 					current: current(),
@@ -68,7 +68,7 @@ export default function Faction() {
 					prestige: 0,
 				}}
 			/>
-			<FactionProgress
+			<FactionBar
 				{...{
 					level: level(),
 					current: current(),
@@ -79,7 +79,7 @@ export default function Faction() {
 					prestige: 0,
 				}}
 			/>
-			<FactionProgress
+			<FactionBar
 				{...{
 					level: level(),
 					current: current(),
@@ -90,7 +90,7 @@ export default function Faction() {
 					prestige: 0,
 				}}
 			/>
-			<FactionProgress
+			<FactionBar
 				{...{
 					level: level(),
 					current: current(),
@@ -101,7 +101,7 @@ export default function Faction() {
 					prestige: 0,
 				}}
 			/>
-			<FactionProgress
+			<FactionBar
 				{...{
 					level: level()+30,
 					current: current(),
@@ -112,7 +112,7 @@ export default function Faction() {
 					prestige: 1,
 				}}
 			/>
-			<FactionProgress
+			<FactionBar
 				{...{
 					level: level(),
 					current: current(),
@@ -123,7 +123,7 @@ export default function Faction() {
 					prestige: 0,
 				}}
 			/>
-			<FactionProgress
+			<FactionBar
 				{...{
 					level: level(),
 					current: current(),
@@ -134,7 +134,7 @@ export default function Faction() {
 					prestige: 0,
 				}}
 			/>
-			<FactionProgress
+			<FactionBar
 				{...{
 					level: level(),
 					current: current(),
