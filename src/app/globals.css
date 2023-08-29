@@ -43,11 +43,17 @@
 	--champ: #84eb34;
 	/* Rarity colors */
 	--common: #fcfcfc;
+	--common-dark: #979797;
 	--uncommon: #1efc00;
+	--uncommon-dark: #129700;
 	--rare: #006ffc;
+	--rare-dark: #004397;
 	--epic: #a134eb;
+	--epic-dark: #611f8d;
 	--legendary: #fc7e00;
+	--legendary-dark: #974c00;
 	--mythic: #f64141;
+	--mythic-dark: #942727;
 }
 
 :root .faction-colors {
@@ -189,4 +195,3 @@ main.grid > * {
 .icon-shadow {
 	filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.4));
 }
-
