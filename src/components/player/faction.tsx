@@ -1,4 +1,6 @@
-import FactionBar from "../bars/faction-bar";
+"use client";
+import { useState } from "react";
+import { useSpring, animated } from "@react-spring/web";
 
 const factions = [
 	"red",
@@ -13,138 +15,159 @@ const factions = [
 	"pink",
 ];
 
-const factionsNames: { [key: string]: string } = {
-	aqua: "Aqua Axolotls",
-	blue: "Blue Bats",
-	cyan: "Cyan Coyotes",
-	green: "Green Geckos",
-	lime: "Lime Llamas",
-	orange: "Orange Ocelots",
-	pink: "Pink Parrots",
-	purple: "Purple Pandas",
-	red: "Red Rabbits",
-	yellow: "Yellow Yaks",
-};
-
-export default function Faction() {
-	// Pick a number between 0 and 50 exclusive
-	const level = () => Math.floor(Math.random() * 30);
-	// Pick a number between 0 and 100_000 exclusive
-	const current = () => Math.floor(Math.random() * 100_000);
+function Number({ n }: { n: number }) {
+	const { number } = useSpring({
+		number: n,
+		config: { mass: 1, tension: 170, friction: 26, duration: 500 },
+	});
 
 	return (
-		<>
-			<h1 className="text-2xl font-bold col-span-2">Faction Levels</h1>
-			<FactionBar
-				{...{
-					level: level(),
-					current: current(),
-					max: 100_000,
-					suffix: "XP",
-					faction: factions[0],
-					factionName: factionsNames[factions[0]],
-					prestige: 0,
-				}}
-			/>
-			<FactionBar
-				{...{
-					level: level(),
-					current: current(),
-					max: 100_000,
-					suffix: "XP",
-					faction: factions[1],
-					factionName: factionsNames[factions[1]],
-					prestige: 0,
-				}}
-			/>
-			<FactionBar
-				{...{
-					level: level(),
-					current: current(),
-					max: 100_000,
-					suffix: "XP",
-					faction: factions[2],
-					factionName: factionsNames[factions[2]],
-					prestige: 0,
-				}}
-			/>
-			<FactionBar
-				{...{
-					level: level(),
-					current: current(),
-					max: 100_000,
-					suffix: "XP",
-					faction: factions[3],
-					factionName: factionsNames[factions[3]],
-					prestige: 0,
-				}}
-			/>
-			<FactionBar
-				{...{
-					level: level(),
-					current: current(),
-					max: 100_000,
-					suffix: "XP",
-					faction: factions[4],
-					factionName: factionsNames[factions[4]],
-					prestige: 0,
-				}}
-			/>
-			<FactionBar
-				{...{
-					level: level(),
-					current: current(),
-					max: 100_000,
-					suffix: "XP",
-					faction: factions[5],
-					factionName: factionsNames[factions[5]],
-					prestige: 0,
-				}}
-			/>
-			<FactionBar
-				{...{
-					level: level()+30,
-					current: current(),
-					max: 100_000,
-					suffix: "XP",
-					faction: factions[6],
-					factionName: factionsNames[factions[6]],
-					prestige: 1,
-				}}
-			/>
-			<FactionBar
-				{...{
-					level: level(),
-					current: current(),
-					max: 100_000,
-					suffix: "XP",
-					faction: factions[7],
-					factionName: factionsNames[factions[7]],
-					prestige: 0,
-				}}
-			/>
-			<FactionBar
-				{...{
-					level: level(),
-					current: current(),
-					max: 100_000,
-					suffix: "XP",
-					faction: factions[8],
-					factionName: factionsNames[factions[8]],
-					prestige: 0,
-				}}
-			/>
-			<FactionBar
-				{...{
-					level: level(),
-					current: current(),
-					max: 100_000,
-					suffix: "XP",
-					faction: factions[9],
-					factionName: factionsNames[factions[9]],
-					prestige: 0,
-				}}
-			/>
-		</>
+		<animated.span>
+			{number.to((num: number) => parseInt(num.toFixed()).toLocaleString())}
+		</animated.span>
+	);
+}
+
+type FactionData = {
+	[index: string]: any;
+	currentFaction: string;
+	red: {
+		level: number;
+		prestige: number;
+		current: number;
+		max: number;
+	};
+	orange: {
+		level: number;
+		prestige: number;
+		current: number;
+		max: number;
+	};
+	yellow: {
+		level: number;
+		prestige: number;
+		current: number;
+		max: number;
+	};
+	lime: {
+		level: number;
+		prestige: number;
+		current: number;
+		max: number;
+	};
+	green: {
+		level: number;
+		prestige: number;
+		current: number;
+		max: number;
+	};
+	cyan: {
+		level: number;
+		prestige: number;
+		current: number;
+		max: number;
+	};
+	aqua: {
+		level: number;
+		prestige: number;
+		current: number;
+		max: number;
+	};
+	blue: {
+		level: number;
+		prestige: number;
+		current: number;
+		max: number;
+	};
+	purple: {
+		level: number;
+		prestige: number;
+		current: number;
+		max: number;
+	};
+	pink: {
+		level: number;
+		prestige: number;
+		current: number;
+		max: number;
+	};
+};
+
+export default function Faction(factionData: FactionData) {
+	// The faction that is currently selected
+	const [selectedFaction, setSelectedFaction] = useState(
+		factionData.currentFaction
+	);
+
+	return (
+		<div className="bg-gray-500 bg-opacity-50 p-2 rounded-lg">
+			<div className="flex flex-wrap justify-center gap-2">
+				{/* Faction Icons */}
+				{factions.map((faction) => (
+					<div
+						key={faction}
+						className={`w-14 h-14 flex justify-center items-center rounded-full faction-colors transition-colors duration-500`}
+						style={{
+							backgroundColor:
+								selectedFaction == faction ? `var(--${faction})` : "#a1a1a1",
+						}}
+						onClick={() => setSelectedFaction(faction)}
+					>
+						<div
+							id={faction}
+							className={`w-12 h-8 pixelated`}
+							style={{
+								backgroundImage: `url('/images/factions/${faction}/${factionData[faction].prestige}.png')`,
+								backgroundRepeat: "no-repeat",
+							}}
+						/>
+					</div>
+				))}
+			</div>
+			{/* Faction Bars */}
+			<div className="m-1">
+				{/* Info */}
+				<div className="flex flex-col md:flex-row md:gap-2">
+					<div className="flex gap-1">
+						{/* Level */}
+						<span className="font-semibold">Level</span>
+						<span className="text-neutral-300">
+							<Number {...{ n: factionData[selectedFaction].level }} />
+						</span>
+					</div>
+					<div className="flex gap-1">
+						{/* Prestige */}
+						<span className="font-semibold">
+							Prestige
+							<span className="text-neutral-300">
+								{" "}
+								<Number {...{ n: factionData[selectedFaction].prestige }} />
+							</span>
+						</span>
+					</div>
+					<div className="md:ml-auto font-semibold">
+						{/* XP */}
+						<Number {...{ n: factionData[selectedFaction].current }} />
+						/<Number {...{ n: factionData[selectedFaction].max }} /> XP
+					</div>
+				</div>
+			</div>
+			{/* Progress Bar */}
+			<div
+				className="h-3 left-0 right-0 rounded-md faction-colors transition-all duration-500"
+				style={{ backgroundColor: `var(--${selectedFaction}-dark)` }}
+			>
+				<div
+					className="h-full left-0 right-0 rounded-md text-center transition-all duration-500"
+					style={{
+						width: `calc(100% * ${(
+							factionData[selectedFaction].current /
+							factionData[selectedFaction].max
+						).toFixed(4)})`,
+						backgroundColor: `var(--${selectedFaction})`,
+					}}
+				></div>
+			</div>
+		</div>
 	);
 }
