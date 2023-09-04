@@ -31,19 +31,36 @@ const passNames: { [key: string]: string } = {
 	cherry_blossom: "Cherry Blossom Game Pass",
 };
 
+type PassData = {
+	current: number;
+	max: number;
+	task1?: {
+		current: number;
+		max: number;
+	};
+	task2?: {
+		current: number;
+		max: number;
+	};
+	task3?: {
+		current: number;
+		max: number;
+	};
+	mastery?: {
+		current: number;
+		max: number;
+	};
+};
+
 export default function PassBar({
 	level, // Current level
-	current, // Current XP
-	max, // Max XP
-
+	data, // Pass data
 	passType, // Game name or Battle Pass
 	type, // Type of pass
 	premium, // Boolean for if the pass is premium or not
 }: {
 	level: number;
-	current: number;
-	max: number;
-	color: string;
+	data: PassData;
 	passType: string;
 	type: string;
 	premium: boolean;
@@ -54,6 +71,7 @@ export default function PassBar({
 	const { refs, floatingStyles, context } = useFloating({
 		open: isOpen,
 		onOpenChange: setIsOpen,
+		placement: "top",
 		middleware: [
 			offset(15),
 			arrow({
@@ -69,6 +87,7 @@ export default function PassBar({
 
 	// Pass info
 	const [passOpen, setPassOpen] = useState(false);
+	const passInfoRef = useRef<HTMLDivElement>(null);
 
 	const color = () => {
 		switch (passType) {
@@ -88,79 +107,80 @@ export default function PassBar({
 	return (
 		<>
 			<div
-				className="relative overflow-clip transition-height duration-700 h-12 aria-selected:h-40"
-				aria-selected={passOpen}
+				className="grid gap-y-2 h-max bg-gray-500 bg-opacity-50 p-2 rounded-lg"
+				onClick={() => {
+					setPassOpen(!passOpen);
+				}}
+				ref={refs.setReference}
 			>
-				<div
-					className="relative w-12 h-12 mcc-colors icon-shadow rounded-full z-10"
-					style={{ backgroundColor: `var(--${color()})` }}
-				>
+				{/* Progress Bar */}
+				<div className="ml-2 mt-2">
 					<div
-						ref={refs.setReference}
-						className="absolute top-4 left-4 w-4 h-4 scale-[2] pixelated"
+						className="w-4 h-4 scale-[2] pixelated float-left"
 						style={{
 							backgroundImage: `url('/images/passes/${passType}/${type}.png')`,
 							backgroundRepeat: "no-repeat",
 						}}
 					></div>
-				</div>
-				<div className="absolute left-14 top-0 font-bold text-sm">
-					Level
-					<span className="text-neutral-300"> {level}</span>
-				</div>
 
+					<span className="font-semibold ml-4">
+						Level
+						<span className="text-neutral-300"> {level}</span>
+					</span>
+					<div className="float-right font-semibold">
+						{data.current.toLocaleString()}/{data.max.toLocaleString()} XP
+					</div>
+				</div>
 				<div
-					className="absolute left-6 top-6 pl-4 right-0 h-6 rounded-r-md mcc-colors"
-					style={{
-						backgroundColor: `var(--${color()}-dark)`,
-						//filter: "brightness(0.6)"
-					}}
-					onClick={() => setPassOpen(!passOpen)}
+					className="h-3 left-0 right-0 rounded-md mcc-colors"
+					style={{ backgroundColor: `var(--${color()}-dark)` }}
 				>
 					<div
-						className="absolute left-0 top-0 bottom-0 rounded-r-md text-center"
+						className="h-full left-0 right-0 rounded-md text-center"
 						style={{
-							width: `calc((100% - 20px)*${(current / max).toFixed(4)})`,
+							width: `calc(100% * ${(data.current / data.max).toFixed(4)})`,
 							backgroundColor: `var(--${color()})`,
 						}}
 					></div>
-					<div
-						onMouseOver={() => setHover(true)}
-						onMouseOut={() => setHover(false)}
-						className={`relative left-5 right-0 top-0 bottom-0 text-center font-bold text-sm text-white`}
-					>
-						{hover
-							? `${current.toLocaleString()} / ${max.toLocaleString()}`
-							: `${
-									// Shorten numbers to thousands if greater than 1,000 (10k) or millions if greater than 1,000,000 (10m)
-									current >= 1000000
-										? `${(current / 1000000).toFixed(1)}M`
-										: current >= 1000
-										? `${(current / 1000).toFixed(0)}K`
-										: current
-							  } / ${
-									// Shorten numbers to thousands if greater than 1,000 (10k) or millions if greater than 1,000,000 (10m)
-									max >= 1000000
-										? `${(max / 1000000).toFixed(1)}M`
-										: max >= 1000
-										? `${(max / 1000).toFixed(0)}K`
-										: max
-							  }`}{" "}
-						XP
+				</div>
+				<div
+					className="transition-height duration-700 overflow-hidden"
+					ref={passInfoRef}
+					style={{
+						height: passOpen ? passInfoRef.current?.scrollHeight : 0,
+					}}
+				>
+					{/* Detailed Info */}
+					<div className="grid grid-flow-col">
+						<p className=" font-bold">{passNames[type]}</p>
+						<p className="text-right">Premium: {premium ? "True" : "False"}</p>
 					</div>
-					<div className="mt-1 bg-neutral-700 bg-opacity-70 rounded-b-md rounded-tr-md p-2 text-white font-semibold">
-						<p>Pass Task 1: 5/10</p>
-						<p>Pass Task 2: 55/275</p>
-						<p>Pass Task 3: 5/100</p>
-						<p>Mastery Task: 5/75</p>
-					</div>
+					{passType != "battle_pass" && (
+						<>
+							<hr className="mb-2" />
+							<p>
+								Pass Task 1: {data.task1!.current}/{data.task1!.max}
+							</p>
+							<p>
+								Pass Task 2: {data.task2!.current}/{data.task2!.max}
+							</p>
+							<p>
+								Pass Task 3: {data.task3!.current}/{data.task3!.max}
+							</p>
+							<p>
+								Mastery Task: {data.mastery!.current}/{data.mastery!.max}
+							</p>
+						</>
+					)}
 				</div>
 			</div>
+			{/* Tooltip */}
 			{isOpen && (
 				<div ref={refs.setFloating} style={floatingStyles} className="z-20">
 					<div className="bg-neutral-800 p-2 rounded-md text-center whitespace-nowrap">
-						<p>{passNames[type]}</p>
-						<p>Premium: {premium ? "True" : "False"}</p>
+						<p className="text-xs">
+							Click to {!passOpen ? "expand" : "collapse"}
+						</p>
 					</div>
 					<FloatingArrow
 						ref={arrowRef}
