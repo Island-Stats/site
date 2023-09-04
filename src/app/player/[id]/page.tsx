@@ -29,7 +29,7 @@ export async function generateMetadata({
 	let title;
 	const player = await getMojangProfile(params.id);
 	const playerDataRes = await fetch(
-		`http://localhost:3000/api/player/${player!.id}`,
+		`http://localhost:3000/api/player/${params.id}`,
 		{ method: "POST" }
 	);
 
@@ -71,11 +71,76 @@ export async function generateMetadata({
 	};
 }
 
+const testData = {
+	currentFaction: "aqua",
+	red: {
+		level: 10,
+		prestige: 0,
+		current: 592,
+		max: 1000,
+	},
+	orange: {
+		level: 32,
+		prestige: 1,
+		current: 642,
+		max: 1000,
+	},
+	yellow: {
+		level: 0,
+		prestige: 0,
+		current: 0,
+		max: 1000,
+	},
+	lime: {
+		level: 8,
+		prestige: 0,
+		current: 320,
+		max: 1000,
+	},
+	green: {
+		level: 0,
+		prestige: 0,
+		current: 0,
+		max: 1000,
+	},
+	cyan: {
+		level: 42,
+		prestige: 1,
+		current: 1642,
+		max: 2000,
+	},
+	aqua: {
+		level: 63,
+		prestige: 2,
+		current: 753,
+		max: 1000,
+	},
+	blue: {
+		level: 0,
+		prestige: 0,
+		current: 0,
+		max: 1000,
+	},
+	purple: {
+		level: 26,
+		prestige: 0,
+		current: 294,
+		max: 1000,
+	},
+	pink: {
+		level: 0,
+		prestige: 0,
+		current: 0,
+		max: 1000,
+	},
+};
+
 export const revalidate = 0;
 
 export default async function Stats({ params }: { params: { id: string } }) {
 	let error: string | null = null;
-	const player = await getMojangProfile(params.id);
+	// TODO: Revert to const
+	let player = await getMojangProfile(params.id);
 
 	// Check if player has MCC Island profile
 	if (!player && params.id.length == 32) {
@@ -87,7 +152,7 @@ export default async function Stats({ params }: { params: { id: string } }) {
 	}
 
 	const playerDataRes = await fetch(
-		`http://localhost:3000/api/player/${player!.id}`,
+		`http://localhost:3000/api/player/${params.id}`,
 		{ method: "POST" }
 	);
 
@@ -95,6 +160,11 @@ export default async function Stats({ params }: { params: { id: string } }) {
 
 	if (playerData.error && !error) {
 		error = "Failed to fetch player games.";
+	}
+
+	player = {
+		id: "4e832e0d14b64f8face2280a9bf9dd98",
+		name: "TheMysterys"
 	}
 
 	// If player exists then display their stats
@@ -109,19 +179,8 @@ export default async function Stats({ params }: { params: { id: string } }) {
 			</main>
 		);
 	} else {
-		let games;
-		if (!playerData) {
-			games = {
-				tgttos: {},
-				hole_in_the_wall: {},
-				sky_battle: {},
-				battle_box: {},
-			};
-		} else {
-			games = playerData.games;
-		}
 		return (
-			<main className="backdrop-blur-lg backdrop-brightness-50 w-3/5 mx-auto min-h-full">
+			<main className="backdrop-blur-lg backdrop-brightness-50 md:w-4/5 md:mx-auto min-h-full">
 				<div
 					id="profile"
 					className="flex flex-wrap justify-items-center gap-3 py-5 text-2xl md:text-4xl"
@@ -138,9 +197,9 @@ export default async function Stats({ params }: { params: { id: string } }) {
 					id="levels"
 					className="bg-black bg-opacity-30 p-5 ml-[calc(-1*20px)] mr-[calc(-1*20px)]"
 				>
-					<div className="w-full grid grid-cols-1 gap-x-1 gap-y-5">
-						<Faction />
-						<CoreData />
+					<div className="w-full">
+						<Faction {...testData} />
+						
 					</div>
 				</div>
 				<div
