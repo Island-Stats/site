@@ -9,6 +9,9 @@ export const metadata: Metadata = {
 		template: "%s | Island Stats",
 		default: "Island Stats",
 	},
+	icons: {
+		icon: "/images/favicon.ico",
+	},
 	description: "MCC Island stats, data, and more!",
 	keywords: ["MCC", "Minecraft", "Island", "Stats", "Data"],
 	themeColor: "#60a5fa",
