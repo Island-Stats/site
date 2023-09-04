@@ -104,23 +104,31 @@ export default function Faction(factionData: FactionData) {
 			<div className="flex flex-wrap justify-center gap-2">
 				{/* Faction Icons */}
 				{factions.map((faction) => (
-					<div
-						key={faction}
-						className={`w-14 h-14 flex justify-center items-center rounded-full faction-colors transition-colors duration-500`}
-						style={{
-							backgroundColor:
-								selectedFaction == faction ? `var(--${faction})` : "#a1a1a1",
-						}}
-						onClick={() => setSelectedFaction(faction)}
-					>
+					<div key={faction}>
 						<div
-							id={faction}
-							className={`w-12 h-8 pixelated`}
+							className={`w-14 h-14 flex justify-center items-center rounded-full faction-colors transition-colors duration-500`}
 							style={{
-								backgroundImage: `url('/images/factions/${faction}/${factionData[faction].prestige}.png')`,
-								backgroundRepeat: "no-repeat",
+								backgroundColor:
+									selectedFaction == faction ? `var(--${faction})` : "#a1a1a1",
 							}}
-						/>
+							onClick={() => setSelectedFaction(faction)}
+						>
+							<div
+								id={faction}
+								className={`w-12 h-8 pixelated`}
+								style={{
+									backgroundImage: `url('/images/factions/${faction}/${factionData[faction].prestige}.png')`,
+									backgroundRepeat: "no-repeat",
+								}}
+							/>
+						</div>
+						<div className="flex gap-1 justify-center">
+							{/* Level */}
+							{/* <span className="font-semibold">Level</span> */}
+							<span className="text-neutral-300">
+								{factionData[faction].level.toLocaleString()}
+							</span>
+						</div>
 					</div>
 				))}
 			</div>
@@ -130,7 +138,7 @@ export default function Faction(factionData: FactionData) {
 				<div className="flex flex-col md:flex-row md:gap-2">
 					<div className="flex gap-1">
 						{/* Level */}
-						<span className="font-semibold">Level</span>
+						 <span className="font-semibold">Level</span>
 						<span className="text-neutral-300">
 							<Number {...{ n: factionData[selectedFaction].level }} />
 						</span>
