@@ -16,6 +16,7 @@ const nextConfig = {
 	images: {
 		domains: ['crafatar.com'],
 	},
+	output: 'standalone',
 };
 
 module.exports = nextConfig;
