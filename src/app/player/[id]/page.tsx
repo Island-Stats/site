@@ -164,8 +164,8 @@ export default async function Stats({ params }: { params: { id: string } }) {
 
 	player = {
 		id: "4e832e0d14b64f8face2280a9bf9dd98",
-		name: "TheMysterys"
-	}
+		name: "TheMysterys",
+	};
 
 	// If player exists then display their stats
 	if (!player || playerData.error) {
@@ -185,9 +185,13 @@ export default async function Stats({ params }: { params: { id: string } }) {
 					id="profile"
 					className="flex flex-wrap justify-items-center gap-3 py-5 text-2xl md:text-4xl"
 				>
-					<span>Stats for</span>
-					<Rank rank={playerData?.rank ?? "player"} />
-					<span className="font-semibold">{player.name}</span>
+					<div className="flex flex-col sm:flex-row sm:space-x-2">
+						<span>Stats for</span>
+						<div className="flex space-x-2">
+							<Rank rank={playerData?.rank ?? "player"} />
+							<span className="font-semibold">{player.name}</span>
+						</div>
+					</div>
 					<div className="w-full text-sm">
 						<FavoriteButton uuid={player.id} />
 						<ShareButton username={player.name} />
@@ -199,7 +203,6 @@ export default async function Stats({ params }: { params: { id: string } }) {
 				>
 					<div className="w-full">
 						<Faction {...testData} />
-						
 					</div>
 				</div>
 				<div
@@ -207,7 +210,6 @@ export default async function Stats({ params }: { params: { id: string } }) {
 					className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-2 gap-y-5 mt-4"
 				>
 					Will contain core stats about the player
-					
 				</div>
 			</main>
 		);
