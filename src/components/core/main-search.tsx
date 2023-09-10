@@ -1,5 +1,4 @@
 "use client";
-
 import {
 	useFloating,
 	autoUpdate,
@@ -53,7 +52,10 @@ export default function MainSearch() {
 			setError(
 				error instanceof Error
 					? error.message
-					: String(error ?? "please enter a valid Minecraft username or UUID")
+					: String(
+							error ??
+								"please enter a valid Minecraft username or UUID"
+					  )
 			);
 
 			show();
@@ -82,7 +84,11 @@ export default function MainSearch() {
 			{visible && (
 				<div ref={refs.setFloating} style={floatingStyles}>
 					<div className="bg-neutral-800 p-2 rounded-md">{error}</div>
-					<FloatingArrow ref={arrowRef} context={context} className="fill-sky-500"/>
+					<FloatingArrow
+						ref={arrowRef}
+						context={context}
+						className="fill-sky-500"
+					/>
 				</div>
 			)}
 			<button
