@@ -4,8 +4,8 @@ import Error from "@/components/core/error";
 import Favorites from "@/components/core/favorites";
 import Profiles from "@/components/core/profiles";
 import Rank from "@/components/player/rank";
-import FavoriteButton from "@/components/buttons/favorite";
-import ShareButton from "@/components/buttons/share";
+import FavoriteButton from "@/components/utils/favorite";
+import ShareButton from "@/components/utils/share";
 import {
 	Size,
 	getMojangProfile,
@@ -188,8 +188,17 @@ export default async function Stats({ params }: { params: { id: string } }) {
 					<div className="flex flex-col sm:flex-row sm:space-x-2">
 						<span>Stats for</span>
 						<div className="flex space-x-2">
-							<Rank rank={playerData?.rank ?? "player"} />
-							<span className="font-semibold">{player.name}</span>
+							<Rank
+								{...{
+									rank: playerData.rank,
+									mcc_plus: {
+										active: true,
+										since: new Date("10/09/2023"),
+										till: new Date("10/10/2023"),
+									},
+									playerName: player.name,
+								}}
+							/>
 						</div>
 					</div>
 					<div className="w-full text-sm">
