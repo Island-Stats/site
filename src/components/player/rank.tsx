@@ -1,12 +1,6 @@
 "use client";
-import {
-	useFloating,
-	autoUpdate,
-	arrow,
-	FloatingArrow,
-	offset,
-	shift,
-} from "@floating-ui/react";
+
+import { Tooltip, TooltipProps, styled, tooltipClasses } from "@mui/material";
 import { useState, useRef } from "react";
 
 const RankNames = {
@@ -29,50 +23,63 @@ const RankImages = {
 	champ: "champ.png",
 };
 
-export default function Rank({ rank }: { rank: string }) {
-	const [visible, setVisible] = useState(false);
-
-	const arrowRef = useRef(null);
-	const { refs, floatingStyles, context } = useFloating({
-		placement: "bottom",
-		open: visible,
-		onOpenChange: setVisible,
-		middleware: [
-			offset({
-				mainAxis: 10,
-			}),
-			arrow({
-				element: arrowRef,
-			}),
-			shift(),
-		],
-		whileElementsMounted: autoUpdate,
-	});
+export default function Rank({
+	rank,
+	mcc_plus,
+	playerName,
+}: {
+	rank: string;
+	mcc_plus: { active: boolean; since: Date; till: Date };
+	playerName: string;
+}) {
+	const RankTooltip = styled(
+		({ className, classes, ...props }: TooltipProps) => (
+			<Tooltip {...props} classes={{ popper: className, ...classes }} />
+		)
+	)(() => ({
+		[`& .${tooltipClasses.arrow}`]: {
+			color: `var(--${rank})`,
+		},
+	}));
 
 	if (rank == "player") return null;
+
 	return (
 		<>
-			<div
-				className="w-10 h-10 pixelated"
-				style={{
-					backgroundImage: `url(/images/ranks/${
-						RankImages[rank as keyof typeof RankImages]
-					})`,
-					backgroundSize: "cover",
-				}}
-				ref={refs.setReference}
-				onClick={() => setVisible(!visible)}
-			/>
-			{visible && (
-				<div ref={refs.setFloating} style={floatingStyles}>
-					<div className="bg-neutral-800 p-2 -ml-4 rounded-md text-base">{RankNames[rank as keyof typeof RankNames]}</div>
-					<FloatingArrow
-						ref={arrowRef}
-						context={context}
-						className="mcc-colors -ml-2"
-						style={{ fill: `var(--${rank})` }}
-					/>
-				</div>
+			<RankTooltip
+				title={RankNames[rank as keyof typeof RankNames]}
+				placement="bottom"
+				classes={{ tooltip: "bg-neutral-800 text-base", arrow: "mcc-colors" }}
+				arrow
+			>
+				<div
+					className="w-10 h-10 pixelated rounded-md"
+					style={{
+						backgroundImage: `url(/images/ranks/${
+							RankImages[rank as keyof typeof RankImages]
+						})`,
+						backgroundSize: "cover",
+					}}
+				/>
+			</RankTooltip>
+			<span className="font-semibold">{playerName}</span>
+			{mcc_plus.active && (
+				<Tooltip
+					title={
+						<div>
+							<p className="font-semibold">MCC Plus</p>
+							<p>Expires: {mcc_plus.till.toDateString()}</p>
+						</div>
+					}
+					placement="bottom"
+					classes={{
+						tooltip: "bg-neutral-800 text-base text-center",
+						arrow: "text-sky-500",
+					}}
+					arrow
+				>
+					<span>+</span>
+				</Tooltip>
 			)}
 		</>
 	);

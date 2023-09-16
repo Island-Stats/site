@@ -1,10 +1,6 @@
 "use client";
-import {
-	useFloating,
-	autoUpdate,
-	arrow,
-	FloatingArrow,
-} from "@floating-ui/react";
+
+import { Tooltip } from "@mui/material";
 import { useState, useRef } from "react";
 
 function validateURL(url: string) {
@@ -28,19 +24,6 @@ export default function MainSearch() {
 	const show = () => setVisible(true);
 	const hide = () => setVisible(false);
 
-	const arrowRef = useRef(null);
-	const { refs, floatingStyles, context } = useFloating({
-		placement: "top",
-		open: visible,
-		onOpenChange: setVisible,
-		middleware: [
-			arrow({
-				element: arrowRef,
-			}),
-		],
-		whileElementsMounted: autoUpdate,
-	});
-
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		const form = event.currentTarget;
@@ -52,10 +35,7 @@ export default function MainSearch() {
 			setError(
 				error instanceof Error
 					? error.message
-					: String(
-							error ??
-								"please enter a valid Minecraft username or UUID"
-					  )
+					: String(error ?? "please enter a valid Minecraft username or UUID")
 			);
 
 			show();
@@ -72,25 +52,24 @@ export default function MainSearch() {
 			onSubmit={handleSubmit}
 		>
 			<p className="text-2xl font-bold">Show Island stats for:</p>
-			<input
-				ref={refs.setReference}
-				id="ign"
-				enterKeyHint="go"
-				placeholder="Enter Username"
-				aria-label="username"
-				className="h-9 w-full bg-white bg-opacity-10 text-center text-white text-xl"
-				required
-			></input>
-			{visible && (
-				<div ref={refs.setFloating} style={floatingStyles}>
-					<div className="bg-neutral-800 p-2 rounded-md">{error}</div>
-					<FloatingArrow
-						ref={arrowRef}
-						context={context}
-						className="fill-sky-500"
-					/>
-				</div>
-			)}
+			<Tooltip
+				open={visible}
+				title={error}
+				classes={{
+					tooltip: "bg-neutral-800 p-2 text-base",
+					arrow: "text-sky-500",
+				}}
+				arrow
+			>
+				<input
+					id="ign"
+					enterKeyHint="go"
+					placeholder="Enter Username"
+					aria-label="username"
+					className="h-9 w-full bg-white bg-opacity-10 text-center text-white text-xl"
+					required
+				/>
+			</Tooltip>
 			<button
 				type="submit"
 				className="flex h-9 items-center bg-sky-500 rounded-md uppercase text-sm text-black font-bold px-4 transition-all duration-300 ease-in-out hover:-translate-y-1 hover:bg-sky-400"
