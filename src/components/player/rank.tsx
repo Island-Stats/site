@@ -2,6 +2,8 @@
 
 import { Tooltip, TooltipProps, styled, tooltipClasses } from "@mui/material";
 import { useState, useRef } from "react";
+const MONTHS_3 = 1000 * 60 * 60 * 24 * 90;
+const MONTHS_12 = 1000 * 60 * 60 * 24 * 365;
 
 const RankNames = {
 	noxcrew: "Noxcrew",
@@ -44,6 +46,24 @@ export default function Rank({
 
 	if (rank == "player") return null;
 
+	let plusIcon = null;
+	if (mcc_plus.active) {
+		const now = Date.now();
+
+		// Longer than 365 days
+		if (now - mcc_plus.since.getTime() > MONTHS_12) {
+			plusIcon = "plus_3.png";
+		} 
+		// Longer than 90 days
+		else if (now - mcc_plus.since.getTime() > MONTHS_3) {
+			plusIcon = "plus_2.png";
+		} 
+		// Less than 90 days
+		else {
+			plusIcon = "plus_1.png";
+		}
+	}
+
 	return (
 		<>
 			<RankTooltip
@@ -53,7 +73,7 @@ export default function Rank({
 				arrow
 			>
 				<div
-					className="w-10 h-10 pixelated rounded-md"
+					className="w-10 h-10 pixelated rounded-md md:mt-0.5 mr-1"
 					style={{
 						backgroundImage: `url(/images/ranks/${
 							RankImages[rank as keyof typeof RankImages]
@@ -78,7 +98,13 @@ export default function Rank({
 					}}
 					arrow
 				>
-					<span>+</span>
+					<div
+						className="w-10 h-10 pixelated rounded-md md:mt-[5px]"
+						style={{
+							backgroundImage: `url(/images/ranks/${plusIcon})`,
+							backgroundSize: "cover",
+						}}
+					/>
 				</Tooltip>
 			)}
 		</>
