@@ -89,9 +89,6 @@ export default function PassBar({
 					arrow: "text-sky-500",
 				}}
 				arrow
-				PopperProps={{
-					disablePortal: true,
-				}}
 			>
 				<div
 					className="grid gap-y-2 h-max bg-gray-500 bg-opacity-50 p-2 rounded-lg"
@@ -102,14 +99,14 @@ export default function PassBar({
 					{/* Progress Bar */}
 					<div className="ml-2 mt-2">
 						<div
-							className="w-4 h-4 scale-[2] pixelated float-left"
+							className="w-8 h-8 pixelated float-left"
 							style={{
 								backgroundImage: `url('/images/passes/${passType}/${type}.png')`,
 								backgroundRepeat: "no-repeat",
 							}}
 						></div>
 
-						<span className="font-semibold ml-4">
+						<span className="font-semibold ml-2">
 							Level
 							<span className="text-neutral-300"> {level}</span>
 						</span>
