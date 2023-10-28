@@ -42,14 +42,40 @@ export default function Rank({
 		},
 	}));
 
-	if (rank == "player") return null;
+	if (rank == "player")
+		return (
+			<>
+				<span className="font-semibold">{playerName}</span>
+				{mcc_plus.active && (
+					<Tooltip
+						title={
+							<div>
+								<p className="font-semibold">MCC Plus</p>
+								<p>Expires: {mcc_plus.till.toDateString()}</p>
+							</div>
+						}
+						placement="bottom"
+						classes={{
+							tooltip: "bg-neutral-800 text-base text-center",
+							arrow: "text-sky-500",
+						}}
+						arrow
+					>
+						<span>+</span>
+					</Tooltip>
+				)}
+			</>
+		);
 
 	return (
 		<>
 			<RankTooltip
 				title={RankNames[rank as keyof typeof RankNames]}
 				placement="bottom"
-				classes={{ tooltip: "bg-neutral-800 text-base", arrow: "mcc-colors" }}
+				classes={{
+					tooltip: "bg-neutral-800 text-base",
+					arrow: "mcc-colors",
+				}}
 				arrow
 			>
 				<div
