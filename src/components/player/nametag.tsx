@@ -1,7 +1,6 @@
 "use client";
 
 import { Tooltip, TooltipProps, styled, tooltipClasses } from "@mui/material";
-import { useState, useRef } from "react";
 
 const RankNames = {
 	noxcrew: "Noxcrew",
@@ -23,7 +22,7 @@ const RankImages = {
 	champ: "champ.png",
 };
 
-export default function Rank({
+export default function NameTag({
 	rank,
 	mcc_plus,
 	playerName,
