@@ -3,7 +3,7 @@ import MainSearch from "@/components/core/main-search";
 import Error from "@/components/core/error";
 import Favorites from "@/components/core/favorites";
 import Profiles from "@/components/core/profiles";
-import Rank from "@/components/player/rank";
+import NameTag from "@/components/player/nametag";
 import FavoriteButton from "@/components/utils/favorite";
 import ShareButton from "@/components/utils/share";
 import {
@@ -188,7 +188,7 @@ export default async function Stats({ params }: { params: { id: string } }) {
 					<div className="flex flex-col sm:flex-row sm:space-x-2">
 						<span>Stats for</span>
 						<div className="flex">
-							<Rank
+							<NameTag
 								{...{
 									rank: playerData.rank,
 									mcc_plus: {

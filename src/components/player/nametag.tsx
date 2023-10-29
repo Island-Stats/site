@@ -1,7 +1,6 @@
 "use client";
 
 import { Tooltip, TooltipProps, styled, tooltipClasses } from "@mui/material";
-import { useState, useRef } from "react";
 const MONTHS_3 = 1000 * 60 * 60 * 24 * 90;
 const MONTHS_12 = 1000 * 60 * 60 * 24 * 365;
 
@@ -25,7 +24,7 @@ const RankImages = {
 	champ: "champ.png",
 };
 
-export default function Rank({
+export default function NameTag({
 	rank,
 	mcc_plus,
 	playerName,
@@ -44,7 +43,30 @@ export default function Rank({
 		},
 	}));
 
-	if (rank == "player") return null;
+	if (rank == "player")
+		return (
+			<>
+				<span className="font-semibold">{playerName}</span>
+				{mcc_plus.active && (
+					<Tooltip
+						title={
+							<div>
+								<p className="font-semibold">MCC Plus</p>
+								<p>Expires: {mcc_plus.till.toDateString()}</p>
+							</div>
+						}
+						placement="bottom"
+						classes={{
+							tooltip: "bg-neutral-800 text-base text-center",
+							arrow: "text-sky-500",
+						}}
+						arrow
+					>
+						<span>+</span>
+					</Tooltip>
+				)}
+			</>
+		);
 
 	let plusIcon = null;
 	if (mcc_plus.active) {
@@ -69,7 +91,10 @@ export default function Rank({
 			<RankTooltip
 				title={RankNames[rank as keyof typeof RankNames]}
 				placement="bottom"
-				classes={{ tooltip: "bg-neutral-800 text-base", arrow: "mcc-colors" }}
+				classes={{
+					tooltip: "bg-neutral-800 text-base",
+					arrow: "mcc-colors",
+				}}
 				arrow
 			>
 				<div
