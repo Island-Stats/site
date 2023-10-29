@@ -187,13 +187,13 @@ export default async function Stats({ params }: { params: { id: string } }) {
 				>
 					<div className="flex flex-col sm:flex-row sm:space-x-2">
 						<span>Stats for</span>
-						<div className="flex space-x-2">
+						<div className="flex">
 							<Rank
 								{...{
 									rank: playerData.rank,
 									mcc_plus: {
 										active: true,
-										since: new Date("10/09/2023"),
+										since: new Date("10/10/2022"),
 										till: new Date("10/10/2023"),
 									},
 									playerName: player.name,
