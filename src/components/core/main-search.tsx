@@ -1,7 +1,7 @@
 "use client";
 
 import { Tooltip } from "@mui/material";
-import { useState, useRef } from "react";
+import { useState } from "react";
 
 function validateURL(url: string) {
 	if (
@@ -35,7 +35,10 @@ export default function MainSearch() {
 			setError(
 				error instanceof Error
 					? error.message
-					: String(error ?? "please enter a valid Minecraft username or UUID")
+					: String(
+							error ??
+								"please enter a valid Minecraft username or UUID"
+					  )
 			);
 
 			show();
@@ -62,6 +65,8 @@ export default function MainSearch() {
 				arrow
 			>
 				<input
+					// TODO: re-enable search input
+					disabled
 					id="ign"
 					enterKeyHint="go"
 					placeholder="Enter Username"
@@ -71,6 +76,8 @@ export default function MainSearch() {
 				/>
 			</Tooltip>
 			<button
+				// TODO: re-enable search button
+				disabled
 				type="submit"
 				className="flex h-9 items-center bg-sky-500 rounded-md uppercase text-sm text-black font-bold px-4 transition-all duration-300 ease-in-out hover:-translate-y-1 hover:bg-sky-400"
 			>
