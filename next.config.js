@@ -13,10 +13,16 @@ const nextConfig = {
 			},
 		];
 	},
+	poweredByHeader: false,
 	images: {
-		domains: ['crafatar.com'],
-	},
-	output: 'standalone',
+		remotePatterns: [
+			{
+				protocol: 'https',
+				hostname: 'crafatar.com',
+				pathname: '/avatars/*',
+			}
+		]
+	}
 };
 
 module.exports = nextConfig;
