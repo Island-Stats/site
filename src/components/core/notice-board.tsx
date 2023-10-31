@@ -1,4 +1,8 @@
-/* import Link from "next/link";
+import Link from "next/link";
+import Parser from "rss-parser";
+const parser = new Parser({
+	headers: { "User-Agent": "Island Stats (https://islandstats.xyz)" },
+});
 
 export const revalidate = 60 * 60; // 1 hour cache
 
@@ -7,7 +11,7 @@ const rssFeed =
 
 export default async function NoticeBoard() {
 	try {
-		const feed = await new RSS(rssFeed);
+		const feed = await parser.parseURL(rssFeed);
 
 		if (!feed) {
 			return null;
@@ -46,4 +50,3 @@ export default async function NoticeBoard() {
 		return;
 	}
 }
- */
