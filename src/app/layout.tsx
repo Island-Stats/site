@@ -1,7 +1,11 @@
-import { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import NavBar from "@/components/nav/nab-bar";
 import Script from "next/script";
+
+export const viewport: Viewport = {
+	themeColor: "#60a5fa",
+}
 
 export const metadata: Metadata = {
 	metadataBase: new URL("https://islandstats.xyz"),
@@ -14,7 +18,6 @@ export const metadata: Metadata = {
 	},
 	description: "MCC Island stats, data, and more!",
 	keywords: ["MCC", "Minecraft", "Island", "Stats", "Data"],
-	themeColor: "#60a5fa",
 	openGraph: {
 		type: "website",
 		title: "Island Stats",
