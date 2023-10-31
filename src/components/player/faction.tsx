@@ -117,8 +117,8 @@ export default function Faction(factionData: FactionData) {
 								id={faction}
 								className={`w-12 h-8 pixelated`}
 								style={{
-									backgroundImage: `url('/images/factions/${faction}/${factionData[faction].prestige}.png')`,
-									backgroundRepeat: "no-repeat",
+									backgroundImage: `url('https://cdn.islandstats.xyz/factions/${faction}/${factionData[faction].prestige}.png')`,
+									backgroundSize: "cover",
 								}}
 							/>
 						</div>

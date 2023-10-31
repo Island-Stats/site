@@ -30,7 +30,7 @@ export default function NameTag({
 	playerName,
 }: {
 	rank: string;
-	mcc_plus: { active: boolean; since: Date; till: Date };
+	mcc_plus: { active: boolean; since: Date };
 	playerName: string;
 }) {
 	const RankTooltip = styled(
@@ -43,6 +43,24 @@ export default function NameTag({
 		},
 	}));
 
+	let plusIcon = null;
+	if (mcc_plus.active) {
+		const now = Date.now();
+
+		// Longer than 365 days
+		if (now - mcc_plus.since.getTime() > MONTHS_12) {
+			plusIcon = "plus_3.png";
+		}
+		// Longer than 90 days
+		else if (now - mcc_plus.since.getTime() > MONTHS_3) {
+			plusIcon = "plus_2.png";
+		}
+		// Less than 90 days
+		else {
+			plusIcon = "plus_1.png";
+		}
+	}
+
 	if (rank == "player")
 		return (
 			<>
@@ -52,7 +70,7 @@ export default function NameTag({
 						title={
 							<div>
 								<p className="font-semibold">MCC Plus</p>
-								<p>Expires: {mcc_plus.till.toDateString()}</p>
+								<p>Since: {mcc_plus.since.toDateString()}</p>
 							</div>
 						}
 						placement="bottom"
@@ -62,29 +80,17 @@ export default function NameTag({
 						}}
 						arrow
 					>
-						<span>+</span>
+						<div
+							className="w-10 h-10 pixelated rounded-md md:mt-[5px]"
+							style={{
+								backgroundImage: `url(https://cdn.islandstats.xyz/ranks/${plusIcon})`,
+								backgroundSize: "cover",
+							}}
+						/>
 					</Tooltip>
 				)}
 			</>
 		);
-
-	let plusIcon = null;
-	if (mcc_plus.active) {
-		const now = Date.now();
-
-		// Longer than 365 days
-		if (now - mcc_plus.since.getTime() > MONTHS_12) {
-			plusIcon = "plus_3.png";
-		} 
-		// Longer than 90 days
-		else if (now - mcc_plus.since.getTime() > MONTHS_3) {
-			plusIcon = "plus_2.png";
-		} 
-		// Less than 90 days
-		else {
-			plusIcon = "plus_1.png";
-		}
-	}
 
 	return (
 		<>
@@ -100,7 +106,7 @@ export default function NameTag({
 				<div
 					className="w-10 h-10 pixelated rounded-md md:mt-0.5 mr-1"
 					style={{
-						backgroundImage: `url(/images/ranks/${
+						backgroundImage: `url(https://cdn.islandstats.xyz/ranks/${
 							RankImages[rank as keyof typeof RankImages]
 						})`,
 						backgroundSize: "cover",
@@ -113,7 +119,7 @@ export default function NameTag({
 					title={
 						<div>
 							<p className="font-semibold">MCC Plus</p>
-							<p>Expires: {mcc_plus.till.toDateString()}</p>
+							<p>Since: {mcc_plus.since.toDateString()}</p>
 						</div>
 					}
 					placement="bottom"
@@ -126,7 +132,7 @@ export default function NameTag({
 					<div
 						className="w-10 h-10 pixelated rounded-md md:mt-[5px]"
 						style={{
-							backgroundImage: `url(/images/ranks/${plusIcon})`,
+							backgroundImage: `url(https://cdn.islandstats.xyz/ranks/${plusIcon})`,
 							backgroundSize: "cover",
 						}}
 					/>

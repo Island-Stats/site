@@ -101,6 +101,14 @@ export default function PassBar({
 						<div
 							className="w-8 h-8 pixelated float-left"
 							style={{
+								backgroundImage: `url('https://cdn.islandstats.xyz/passes/${passType}/${type}.png')`,
+								backgroundSize: "32px",
+								backgroundRepeat: "no-repeat",
+							}}
+						></div>
+						<div
+							className="w-8 h-8 pixelated float-left"
+							style={{
 								backgroundImage: `url('/images/passes/${passType}/${type}.png')`,
 								backgroundRepeat: "no-repeat",
 							}}
